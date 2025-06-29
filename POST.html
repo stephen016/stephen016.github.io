@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Efficient and Privacy-Preserving Soft Prompt Transfer for LLMs">
+  <meta name="keywords" content="POST">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>POST</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+
+
+
+  </script> -->
+
+<!-- <link rel="icon" type="image/png" href="media/nice-slam/like.png">  -->
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./projects/css/bulma.min.css">
+  <link rel="stylesheet" href="./projects/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./projects/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./projects/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./projects/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./projects/js/fontawesome.all.min.js"></script>
+  <script src="./projects/js/bulma-carousel.min.js"></script>
+  <script src="./projects/js/bulma-slider.min.js"></script>
+  <script src="./projects/js/index.js"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://stephen016.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://stephen016.github.io/SPA">
+                SPA - arxiv 2024
+              </a>
+              <a class="navbar-item" href="https://stephen016.github.io/POST">
+                POST - ICML 2025
+              </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- <div class="columns is-centered">
+        <div class="column is-7 has-text-centered">
+          <img src="media/nice-slam/nice-slam-logo2.png" alt="NICE-SLAM"/>
+        </div>
+      </div> -->
+        <div class="column has-text-centered">
+          <!-- <h1 class="title is-1 publication-title"><img src="media/nice-slam/like.png" width="90">NICE-SLAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>Neural Implicit Scalable Encoding for SLAM</h1> -->
+          <h1 class="title is-2 publication-title">Efficient and Privacy-Preserving Soft Prompt Transfer for LLMs</h1>
+          <div class="column is-full_width">
+            <h2 class="title is-5">Forty-Second International Conference on Machine Learning 2025</h2>
+          </div>
+          <!-- <br> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+                <a href="https://stephen016.github.io/">Xun Wang</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="author-block">
+                  <a href="https://xujing1994.github.io/">Jing Xu</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="author-block">
+                <a href="https://franziska-boenisch.de/">Franziska Boenisch</a><sup>1,#</sup>&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://michaelbackes.eu/">Michael Backes</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://www.christopherchoquette.com/">Christopher A. Choquette Choo</a><sup>2</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="http://adam-dziedzic.com/">Adam Dziedzic</a><sup>1,#</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+            </div>
+            <div class="column is-full_width">
+              <h2 class="is-size-6"># Corresponding Author</h2>
+            <!-- <h2 class="is-size-6">(* equal contribution)  (<span>&#8224;</span> corresponding author)</h2> -->
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>CISPA Helmholtz Center for Information Security</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Google DeepMind</span>&nbsp;&nbsp;
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=WnTGpncrxK" target="_blank"
+                   class="button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=qn35joS5zZM"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Poster Link. -->
+              <!-- <span class="link-block">
+                <a href="media/nice-slam/poster_nice-slam.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-palette"></i>
+                  </span>
+                  <span>Poster</span>
+                  </a>
+              </span> -->
+              <!-- Code Link. -->
+               <span class="link-block">
+               <a href="https://github.com/sprintml/POST" target="_blank"
+		   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span >Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+        <!-- Paper video. -->
+        <!-- <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Video</h2>
+            <div class="publication-video">
+                <iframe src="https://www.youtube.com/embed/0T_vt5myvVY?si=4Fg_RsldJVT6bSq5"></iframe>
+            </div>
+          </div>
+        </div> -->
+        <!--/ Paper video. -->
+
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          </p>
+          <p>
+            Prompting has become a dominant paradigm for adapting large language models (LLMs). While discrete (textual) prompts are widely used for their interpretability, soft (parameter) prompts have recently gained traction in APIs. This is because they can encode information from more training samples while minimizing the user's token usage, leaving more space in the context window for task-specific input. 
+            However, soft prompts are tightly coupled to the LLM they are tuned on, limiting their generalization to other LLMs. This constraint is particularly problematic for efficiency and privacy: (1) tuning prompts on each LLM incurs high computational costs, especially as LLMs continue to grow in size. Additionally, (2) when the LLM is hosted externally, soft prompt tuning often requires sharing private data with the LLM provider. For instance, this is the case with the NVIDIA NeMo API. To address these issues, we propose POST (Privacy Of Soft prompt Transfer), a framework that enables private tuning of soft prompts on a small model and subsequently transfers these prompts to a larger LLM. POST uses knowledge distillation to derive a small model directly from the large LLM to improve prompt transferability, tunes the soft prompt locally, optionally with differential privacy guarantees, and transfers it back to the larger LLM using a small public dataset. Our experiments show that POST reduces computational costs, preserves privacy, and effectively transfers high-utility soft prompts.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<style>
+
+    .circle-num {
+      display: inline-block;
+      background-color: black;
+      color: white;
+      border: 2px solid white;
+      border-radius: 50%;
+      width: 1.6em;
+      height: 1.6em;
+      text-align: center;
+      line-height: 1.6em;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .step {
+      margin-top: 1em;
+    }
+  </style>
+<style>
+    .centered {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 80%;           /* or a fixed px */
+    }
+  </style>
+<style>
+    .centered_small {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%;           /* or a fixed px */
+    }
+  </style>
+<style>
+    .model-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .model-table th,
+    .model-table td {
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .model-table thead th {
+      border-bottom: 1px solid #000;
+    }
+    .model-table {
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+    .model-table tbody tr:last-child td {
+      /* no extra rule here; bottom border is on the table */
+    }
+  </style>
+ <style>
+    .perf-table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+    .perf-table th,
+    .perf-table td {
+      padding: 6px 10px;
+      text-align: center;
+    }
+    .perf-table {
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+    .perf-table thead th {
+      border-bottom: 1px solid #000;
+    }
+  </style>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full_width">
+        <hr>
+        <h2 class="title is-3">Method</h2>
+        <img src="projects/POST/POST_v2.png" class="centered"/>
+        <div class="content has-text-justified">
+          <p>
+            System overview of <strong>POST</strong>. <span class="circle-num">1</span> An LLM provider compresses their LLM $\Phi_t$ into a smaller model $\Phi_s$ through knowledge distillation.
+            <span class="circle-num">2</span> The private data owner learns a specific soft prompt $p_s$ on $\Phi_s$ using the private dataset (optionally with differential privacy guarantees).
+            <span class="circle-num">3</span> The LLM provider obtains the soft prompt $p_t$ for solving the user's task by transferring $p_s$ to the target LLM $\Phi_t$---solely relying on a small public dataset and no access to the private data for transfer.     
+              </p>
+        </div>
+      </div>
+    </div>
+    <h3 class="title is-4">knowledge Distillation</h3>
+    <p>
+        more aggressive knowledge distillation without emphasis on the student model’s performance:    
+        </p>
+        <br>
+        <table class="model-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Layer Number</th>
+                <th>Hidden Dimension</th>
+                <th>Head Number</th>
+                <th>Parameter Num (M)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Roberta-base</td>
+                <td>12</td>
+                <td>768</td>
+                <td>12</td>
+                <td>125</td>
+              </tr>
+              <tr>
+                <td>Our distilled Roberta-base</td>
+                <td>2</td>
+                <td>768</td>
+                <td>12</td>
+                <td>53</td>
+              </tr>
+              <tr>
+                <td>GPT2-XL</td>
+                <td>48</td>
+                <td>1600</td>
+                <td>25</td>
+                <td>1560</td>
+              </tr>
+              <tr>
+                <td>Our distilled GPT2-XL</td>
+                <td>4</td>
+                <td>1600</td>
+                <td>25</td>
+                <td>205</td>
+              </tr>
+              <tr>
+                <td>Llama2-7b</td>
+                <td>32</td>
+                <td>4096</td>
+                <td>32</td>
+                <td>6738</td>
+              </tr>
+              <tr>
+                <td>Our distilled Llama2-b</td>
+                <td>2</td>
+                <td>4096</td>
+                <td>32</td>
+                <td>667</td>
+              </tr>
+            </tbody>
+          </table>
+          
+    <br>
+    <h3 class="title is-4">Local Prompt Tuning</h3>
+    <ul>
+        <li>
+          <strong>Confidentiality preserving</strong><br>
+          Users locally tune a source prompt \(p_s\) without sending their private data \(D_{\text{private}}\) to the model provider.<br>
+          <div class="formula">
+            \[
+              \arg\min_{p_s}\;\sum_{x \in D_{\text{private}}} \mathcal{L}\bigl(\Phi_s,\,p_s + x\bigr)
+            \]
+          </div>
+        </li>
+        <li>
+          <strong>Differential privacy guarantee</strong><br>
+          Users apply Prompt-DPSGD to tune soft prompts.
+        </li>
+      </ul>
+      <br>
+    <h3 class="title is-4">Prompt Transfer with Public Data</h3>
+    <ul>
+        <li>
+          Use a small \(D_{\text{public}}\) for transfer.
+        </li>
+        <li>
+          Designed loss function.<br>
+          <div class="formula">
+            \[
+              \mathcal{L} \;=\;(1 - \alpha)\,\mathcal{L}_1 \;+\; \alpha\,\mathcal{L}_2
+            \]
+          </div>
+          <ul>
+            <li>
+              <div class="formula">
+                \[
+                  \mathcal{L}_1 \;=\;\sum_{\hat{x}\in D_{\text{pub}}} 
+                    \mathrm{KLDiv}\bigl(\Phi_t(p_t + \hat{x}),\,\Phi_s(p_s + \hat{x})\bigr)
+                \]
+              </div>
+            </li>
+            <li>
+              <div class="formula">
+                \[
+                  \mathcal{L}_2 \;=\;\sum_{\hat{x}\in D_{\text{pub}}} 
+                    \mathrm{KLDiv}\bigl(\bigl[\Phi_t(p_t + \hat{x}) - \Phi_t(\hat{x})\bigr],\,
+                                    \bigl[\Phi_s(p_s + \hat{x}) - \Phi_s(\hat{x})\bigr]\bigr)
+                \]
+              </div>
+            </li>
+          </ul>
+      
+          <p><strong>\(\mathcal{L}_1\):</strong> align the predictions of the prompted source and target models.</p>
+          <p><strong>\(\mathcal{L}_2\):</strong> align the direction change induced by the private prompt between \(\Phi_t\) and \(\Phi_s\).</p>
+          <p><strong>\(\alpha\):</strong> control the balance between the two losses.</p>
+        </li>
+      </ul>
+      
+    <hr>
+
+    <!-- Experimental Results.-->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full_width">
+        <h2 class="title is-3">Experimental Results</h2>
+      </div>
+    </div>
+    <p>
+      &nbsp
+    </p>
+    <h3 class="title is-4">Transfer Performnace</h3>
+    <ul>
+        <li>POST outperforms full model ZS, compressed model PT, and direct transfer.</li>
+        <li>POST achieves close performance to the full model PT.</li>
+        <li>POST performs well with and without DP.</li>
+      </ul>
+    <div class="columns is-centered has-text-centered">
+    </div>
+    <p style="text-align: center;"><strong>Transfer of Llama2-7B</strong>  </p>
+    <img src="projects/POST/transfer_nonDP.png" class="centered_small"/>
+    <p style="text-align: center;"><strong>Confidential and DP (&epsilon;=8) Transfer of Llama2-7B</strong>  </p>
+    <img src="projects/POST/transfer_DP.png" class="centered_small"/>
+
+    <h3 class="title is-4">Runtime Performnace</h3>
+    <p>
+        POST is significantly faster than directly prompt tuning on the full model.
+    </p>
+    <img src="projects/POST/runtime.png" class="centered_small"/>
+    <div class="columns is-centered has-text-centered">
+    </div>
+
+
+
+    <h3 class="title is-4">Baseline Comparison</h3>
+      <p>
+        We compare <strong>POST</strong> with the following baselines:
+        <ul>
+          <li><strong>Direct Prompt Transfer</strong>: directly transfer the soft prompt from the small model to the large model.</li>
+          <li><strong>Zero-shot Transfer</strong>: tune the soft prompt on the large model using the private data.</li>
+          <li><strong>DP-OPT</strong>: tunes a discrete prompt locally and then directly uses it on the large model.  </li>
+        </ul>
+      </p>
+      <table class="perf-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Φ<sub>s</sub></th>
+            <th>sst2</th>
+            <th>imdb</th>
+            <th>tweet</th>
+            <th>arisetv</th>
+            <th>mpqa</th>
+            <th>disaster</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OPT</td>
+            <td>2-Lay</td>
+            <td>81.31</td>
+            <td>68.44</td>
+            <td>38.35</td>
+            <td>82.00</td>
+            <td>58.50</td>
+            <td>46.00</td>
+
+          </tr>
+          <tr>
+            <td>OPT</td>
+            <td>GPT2</td>
+            <td>81.65</td>
+            <td>79.55</td>
+            <td>43.40</td>
+            <td>78.26</td>
+            <td>77.60</td>
+            <td>55.60</td>
+
+          </tr>
+          <tr>
+            <td>DP-OPT</td>
+            <td>GPT2</td>
+            <td>72.59</td>
+            <td>69.53</td>
+            <td>24.90</td>
+            <td>30.44</td>
+            <td>61.80</td>
+            <td>48.90</td>
+
+          </tr>
+          <tr>
+            <td>ZST</td>
+            <td>2-Lay</td>
+            <td>62.38</td>
+            <td>70.57</td>
+            <td>42.80</td>
+            <td>58.33</td>
+            <td>33.31</td>
+            <td>43.55</td>
+          </tr>
+          <tr>
+            <td>ZST with DP</td>
+            <td>2-Lay</td>
+            <td>53.55</td>
+            <td>69.47</td>
+            <td>41.65</td>
+            <td>59.54</td>
+            <td>32.70</td>
+            <td>43.49</td>
+
+          </tr>
+          <tr>
+            <td><strong>POST (ours)</strong></td>
+            <td>2-Lay</td>
+            <td><strong>90.14</strong></td>
+            <td><strong>86.27</strong></td>
+            <td><strong>61.70</strong></td>
+            <td><strong>86.71</strong></td>
+            <td><strong>87.37</strong></td>
+            <td><strong>62.84</strong></td>
+
+          </tr>
+          <tr>
+            <td><strong>DP-POST (ours)</strong></td>
+            <td>2-Lay</td>
+            <td>89.91</td>
+            <td>83.26</td>
+            <td>59.55</td>
+            <td>82.60</td>
+            <td>80.17</td>
+            <td>58.62</td>
+
+          </tr>
+        </tbody>
+      </table>
+      
+
+
+</div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{wang2025post,
+        title = {Efficient and Privacy-Preserving Soft Prompt Transfer for LLMs},
+        author = {Wang, Xun and Xu, Jing and Boenisch, Franziska and Backes, Michael and Choquette-Choo, Christopher A. and Dziedzic, Adam},
+        year = {2025},
+        booktitle = {Forty-Second International Conference on Machine Learning (ICML)}
+      }</code></pre>
+  </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+      <!-- Method. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full_width">
+          <hr>
+          <h2 class="title is-3">Conclusion</h2>
+          <div class="content has-text-justified">
+            <p>
+                We present POST, a framework for the private transfer of soft prompts that enables adapting LLMs with private user data while protecting both the user’s privacy and the LLM
+                provider’s intellectual property. POST relies on distillation to enable an LLM provider to share a small model with limited utility to a client for local prompt tuning on their
+                private data, optionally with DP guarantees. Using our new prompt transfer method that leverages a small set of public data, the LLM provider can then transfer the prompt to their
+     model. Our experiments highlight that the POST framework achieves significant improvements on the private tasks through the prompt transfer, improves the computational efficiency of prompt tuning and outperforms all private prompt
+                transfer baselines. Thereby, our work paves the way for more trustworthy application of LLMs.</p>
+          </div>
+        </div>
+      </div>
+
+<section class="section" id="Acknowledgements">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgements</h2>
+    The project on which this paper is based was funded by the German Federal Ministry of Education and Research (BMBF) under funding number 16KIS2114K. Responsibility for the content of this publication lies with the authors.
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+            This webpage template is from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. 
+            We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.
+          </p>
+        </div>
+      </div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
