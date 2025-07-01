@@ -1,7 +1,9 @@
 # main links links
 main:
   - title: "Publications"
-    url: https://stephen016.github.io/publications/
+    url: /publications/
+    #url: https://stephen016.github.io/publications/
+
 
   #- title: "Talks"
   #  url: /talks/    
