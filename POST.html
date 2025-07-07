@@ -305,23 +305,39 @@
           <p>
             Method overview for <strong>POST</strong>. <span class="circle-num">1</span> An LLM provider compresses their LLM $\Phi_t$ into a smaller model $\Phi_s$ through knowledge distillation.
             <span class="circle-num">2</span> The private data owner learns a specific soft prompt $p_s$ on $\Phi_s$ using the private dataset (optionally with differential privacy guarantees).
-            <span class="circle-num">3</span> The LLM provider obtains the soft prompt $p_t$ for solving the user's task by transferring $p_s$ to the target LLM $\Phi_t$ -- solely relying on a small public dataset and no access to the private data for transfer.     
+            <span class="circle-num">3</span> The LLM provider obtains the soft prompt $p_t$ for solving the user's task by transferring $p_s$ to the target LLM $\Phi_t$&mdash;solely relying on a small public dataset and no access to the private data for transfer.     
               </p>
         </div>
       </div>
     </div>
-    <h3 class="title is-4">knowledge Distillation</h3>
-    <p>
-        more aggressive knowledge distillation without emphasis on the student model’s performance:    
-        </p>
+    <h6 class="title is-4"> <span class="circle-num">1</span> Knowledge Distillation</h6>
+      <p>
+        We peform KD to compress the big LLM from model provider to a small model. The distillation objective is given by the the formula below.
+      </p>
+      <div class="formula">
+        \[
+          \mathcal{L}_{distill} \;=\; \alpha_{ce}\mathcal{L}_{ce} \;+\; \alpha_{lm}\,\mathcal{L}_{lm} \;+ \;\alpha_{cos}\,\mathcal{L}_{cos}
+        \]
+      </div>
+      <p>
+        This objective combines three losses: distillation loss \( \mathcal{L}_{\mathrm{ce}} \) ,
+        language modeling loss \( \mathcal{L}_{\mathrm{lm}} \) ,and embedding cosine loss \( \mathcal{L}_{\mathrm{cos}} \) . 
+        The distillation loss \( \mathcal{L}_{\mathrm{ce}} \) measures the Kullback-Leibler divergence between the logits of $\Phi_s$ and $\Phi_t$. 
+        The language modeling loss \( \mathcal{L}_{\mathrm{lm}} \) corresponds to the standard pretraining objective, using cross-entropy to predict masked
+        or next tokens.
+        The embedding cosine loss \( \mathcal{L}_{\mathrm{cos}} \) computes the cosine distance between the embeddings of $\Phi_s$ and $\Phi_t$.
+        These three losses are weighted by $\alpha_{ce}$, $\alpha_{lm}$, and $\alpha_{cos}$ .
+      </p>
+      <p>
+        We perform an aggressive KD that does not take the student performance into account, but compresses the model to the maximum. This has the purpose of ensuring that $\Phi_s$ is small enough
+        to fit into the user’s hardware for local prompt tuning and is not performant enough to disincentivise the (paid) use of $\Phi_t$, as desired by the LLM provider. We show the model size before and after KD in the table below.
+      </p>
         <br>
-        <table class="model-table">
+        <table class="perf-table">
             <thead>
               <tr>
                 <th>Model</th>
                 <th>Layer Number</th>
-                <th>Hidden Dimension</th>
-                <th>Head Number</th>
                 <th>Parameter Num (M)</th>
               </tr>
             </thead>
@@ -329,88 +345,69 @@
               <tr>
                 <td>Roberta-base</td>
                 <td>12</td>
-                <td>768</td>
-                <td>12</td>
                 <td>125</td>
               </tr>
               <tr>
                 <td>Our distilled Roberta-base</td>
                 <td>2</td>
-                <td>768</td>
-                <td>12</td>
                 <td>53</td>
               </tr>
               <tr>
                 <td>GPT2-XL</td>
                 <td>48</td>
-                <td>1600</td>
-                <td>25</td>
                 <td>1560</td>
               </tr>
               <tr>
                 <td>Our distilled GPT2-XL</td>
                 <td>4</td>
-                <td>1600</td>
-                <td>25</td>
                 <td>205</td>
               </tr>
               <tr>
                 <td>Llama2-7b</td>
-                <td>32</td>
-                <td>4096</td>
                 <td>32</td>
                 <td>6738</td>
               </tr>
               <tr>
                 <td>Our distilled Llama2-b</td>
                 <td>2</td>
-                <td>4096</td>
-                <td>32</td>
                 <td>667</td>
               </tr>
             </tbody>
           </table>
           
     <br>
-    <h3 class="title is-4">Local Prompt Tuning</h3>
-    <ul>
-        <li>
-          <strong>Confidentiality preserving</strong><br>
-          Users locally tune a source prompt \(p_s\) without sending their private data \(D_{\text{private}}\) to the model provider.<br>
+    <h6 class="title is-4"> <span class="circle-num">2</span> Local Prompt Tuning</h6>
+    <p>
+        In this step, users locally tune a source prompt \(p_s\) on the small source model $\Phi_s$ using their private data \(D_{\text{private}}\) .<br>
+    </p>
           <div class="formula">
             \[
               \arg\min_{p_s}\;\sum_{x \in D_{\text{private}}} \mathcal{L}\bigl(\Phi_s,\,p_s + x\bigr)
             \]
           </div>
-        </li>
-        <li>
-          <strong>Differential privacy guarantee</strong><br>
-          Users apply Prompt-DPSGD to tune soft prompts.
-        </li>
-      </ul>
+      <p>
+        This provides confidentiality for the private data since the data is not directly sent to the LLM provider. Besides, we also propose to tune
+        \(p_s\) with DP, for example, using the PromptDPSGD algorithm (Duan et al., 2023a). This ensures that the learned prompts also have a formal privacy guarantee. 
+      </p>
       <br>
-    <h3 class="title is-4">Prompt Transfer with Public Data</h3>
-    <ul>
-        <li>
-          Use a small \(D_{\text{public}}\) for transfer.
-        </li>
-        <li>
-          Designed loss function.<br>
+      <h6 class="title is-4"> <span class="circle-num">3</span> Prompt Transfer with Public Data</h6>
+        <p>
+          We propose to use a small \(D_{\text{public}}\) to transfer the source prompt \(p_s\) on $\Phi_s$ to the target prompt \(p_t\), that can be used on $\Phi_t$ . 
+        </p>
+        <p>
+          We design a loss function for such transfer.<br>
           <div class="formula">
             \[
               \mathcal{L} \;=\;(1 - \alpha)\,\mathcal{L}_1 \;+\; \alpha\,\mathcal{L}_2
             \]
           </div>
-          <ul>
-            <li>
               <div class="formula">
                 \[
                   \mathcal{L}_1 \;=\;\sum_{\hat{x}\in D_{\text{pub}}} 
                     \mathrm{KLDiv}\bigl(\Phi_t(p_t + \hat{x}),\,\Phi_s(p_s + \hat{x})\bigr)
                 \]
               </div>
-            </li>
-            <li>
+
               <div class="formula">
                 \[
                   \mathcal{L}_2 \;=\;\sum_{\hat{x}\in D_{\text{pub}}} 
@@ -418,8 +415,7 @@
                                     \bigl[\Phi_s(p_s + \hat{x}) - \Phi_s(\hat{x})\bigr]\bigr)
                 \]
               </div>
-            </li>
-          </ul>
+
       
           <p><strong>\(\mathcal{L}_1\):</strong> align the predictions of the prompted source and target models.</p>
           <p><strong>\(\mathcal{L}_2\):</strong> align the direction change induced by the private prompt between \(\Phi_t\) and \(\Phi_s\).</p>
@@ -438,43 +434,61 @@
     <p>
       &nbsp
     </p>
-    <h3 class="title is-4">Transfer Performnace</h3>
-    <ul>
-        <li>POST outperforms full model ZS, compressed model PT, and direct transfer.</li>
-        <li>POST achieves close performance to the full model PT.</li>
-        <li>POST performs well with and without DP.</li>
-      </ul>
+    <h6 class="title is-4">Transfer Performnace</h6>
+    <p>
+      We compare the performance of POST agains 4 baselines.
+    </p>
+    <ul class="list-disc pl-5">
+    <li>Full PT: prompt tuning peformance on the full model (upper bound).</li>
+    <li>Full ZS: zero-shot performance of the full model.</li>
+    <li>Compressed PT: prompt tuning performance on the compressed model.</li>
+    <li>Direct Transfer:  directly apply the soft prompt to large model.</li>
+    </ul>
+    <br>
     <div class="columns is-centered has-text-centered">
     </div>
-    <p style="text-align: center;"><strong>Transfer of Llama2-7B</strong>  </p>
+    <p style="text-align: center;"><strong>Confidential Transfer of Llama2-7B</strong>  </p>
     <img src="projects/POST/transfer_nonDP.png" class="centered_small"/>
     <p style="text-align: center;"><strong>Confidential and DP (&epsilon;=8) Transfer of Llama2-7B</strong>  </p>
     <img src="projects/POST/transfer_DP.png" class="centered_small"/>
-
-    <h3 class="title is-4">Runtime Performnace</h3>
     <p>
-        POST is significantly faster than directly prompt tuning on the full model.
+      The results show that: </p>
+    <ul class="list-disc pl-5">
+        <li>POST outperforms full model ZS, compressed model PT, and direct transfer.</li>
+        <li>POST achieves close performance to the full model PT.</li>
+        <li>POST performs well with and without DP.</li>
+    </ul>
+    <br>
+
+    <h6 class="title is-4">Runtime Performnace</h6>
+    <p>
+        We analyze the runtime of our POST’s individual components and compare them to the runtime of full prompt
+    tuning on GPT2-XL. Note that in practice, full prompt tuning on the large LLM leaks all the private prompt data to the LLM
+    owner and is, hence, not practical. POST exhibits a significant sppedup in runtime compared to full prompt tuning on the large LLM.
     </p>
+    <br>
     <img src="projects/POST/runtime.png" class="centered_small"/>
     <div class="columns is-centered has-text-centered">
     </div>
 
 
 
-    <h3 class="title is-4">Baseline Comparison</h3>
+    <h6 class="title is-4">Baseline Comparison</h6>
       <p>
-        We compare <strong>POST</strong> with the following baselines:
-        <ul>
-          <li><strong>Direct Prompt Transfer</strong>: directly transfer the soft prompt from the small model to the large model.</li>
-          <li><strong>Zero-shot Transfer</strong>: tune the soft prompt on the large model using the private data.</li>
-          <li><strong>DP-OPT</strong>: tunes a discrete prompt locally and then directly uses it on the large model.  </li>
-        </ul>
-      </p>
+        We compare <strong>POST</strong> with the following prompt transfer methods:  </p>
+      <ul class="list-disc pl-5">
+          <li><strong>Zero-shot Transfer</strong> (Wu et al., 2023) : tune the soft prompt on the large model using the private data.</li>
+          <li><strong>DP-OPT</strong> (Hong et al., 2023) : tunes a discrete prompt locally and then directly uses it on the large model.  </li>
+      </ul>
+      <br>
+        <p>
+            We compare the performance of POST against these baselines on 7 datasets. The experiments use Llama2-7B model as target model, each method are evaluated with and without DP. The results are shown in the table below. 
+        </p>
       <table class="perf-table">
         <thead>
           <tr>
             <th>Method</th>
-            <th>Φ<sub>s</sub></th>
+            <th>$\Phi_s$</sub></th>
             <th>sst2</th>
             <th>imdb</th>
             <th>tweet</th>
