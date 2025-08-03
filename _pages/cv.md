@@ -18,7 +18,7 @@ Education
   * Member of SprintML Lab
 * **M.S.**, Technical University of Munich, 2023
   * Graduated with High Distinction
-  * Thesis: Advanced Topics in Machine Learning Optimization
+  * Thesis: Architecture-Agnostic Neural Network Pruning
 
 
 <!-- Work experience
