@@ -12,15 +12,14 @@ redirect_from:
 
 Education
 ======
-* **Ph.D. in Computer Science**, CISPA Helmholtz Center for Information Security, 2023-Present
+* **Ph.D. Student in Computer Science**, CISPA Helmholtz Center for Information Security, 2023-Present
   * Focus: Machine Learning Security and Privacy
   * Co-supervised by Prof. Michael Backes, Prof. Franziska Boenisch, and Prof. Adam Dziedzic
   * Member of SprintML Lab
-* **M.S. in Computer Science**, Technical University of Munich, 2023
+* **M.S.**, Technical University of Munich, 2023
   * Graduated with High Distinction
   * Thesis: Advanced Topics in Machine Learning Optimization
-* **B.S. in Computer Science**, Tongji University, 2020
-  * Major: Computer Science and Technology
+
 
 <!-- Work experience
 ======
