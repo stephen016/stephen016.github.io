@@ -1,8 +1,9 @@
 ---
 layout: archive
-title: "Publications"
+title: "Publications - Xun Wang"
 permalink: /publications/
 author_profile: true
+excerpt: "Research publications by Xun Wang on trustworthy machine learning."
 ---
 
 {% if site.author.googlescholar %}

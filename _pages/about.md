@@ -1,6 +1,7 @@
 ---
 permalink: /
-#title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "Xun Wang - Ph.D. Student in Machine Learning Security at CISPA"
+excerpt: "Ph.D. student at CISPA researching trustworthy machine learning."
 author_profile: true
 redirect_from: 
   - /about/
@@ -11,12 +12,30 @@ redirect_from:
 
 About Me
 ======
-I am currently a second-year Ph.D student at CISPA Helmholtz Center for Information Security, co-supervised by [Prof. Michael Backes](https://michaelbackes.eu/group.html), [Prof. Franziska Boenisch](https://franziska-boenisch.de/) and [Prof. Adam Dziedzic](https://adam-dziedzic.com/) at [SprintML Lab](https://sprintml.com/). Prior to that, I obtained my M.S. degree in Computer Science from [Technical University of Munich](https://www.tum.de/en/) in 2023 and pass with high distinction. 
+I am currently a second-year Ph.D. student at [CISPA Helmholtz Center for Information Security](https://cispa.de/), where I conduct cutting-edge research at the intersection of machine learning and security. I am co-supervised by [Prof. Michael Backes](https://michaelbackes.eu/group.html), [Prof. Franziska Boenisch](https://franziska-boenisch.de/), and [Prof. Adam Dziedzic](https://adam-dziedzic.com/) at [SprintML Lab](https://sprintml.com/).
+
+Prior to my doctoral studies, I obtained my M.S. degree in Computer Science from [Technical University of Munich (TUM)](https://www.tum.de/en/) in 2023, graduating with high distinction. I completed my B.S. degree at [Tongji University](https://en.tongji.edu.cn/) in 2020.
 
 Research Interests
 ======
+My research focuses on developing **efficient and privacy-preserving machine learning systems**. I am particularly interested in:
 
-My research interests lie in the intersection of machine learning and security, with a focus on developing efficient and secure machine learning systems. 
+- **Neural Network Pruning & Compression**: Developing structured pruning techniques that maintain model performance while reducing computational overhead
+- **Privacy-Preserving ML**: Creating methods for secure and private transfer learning, particularly in the context of large language models
+- **Efficient Deep Learning**: Designing algorithms that make deep learning more accessible and practical for resource-constrained environments
+- **Machine Learning Security**: Investigating vulnerabilities and defenses in ML systems
+
+Current Research Highlights
+======
+- **Structurally Prune Anything (SPA)**: A versatile framework for structured pruning that works across any architecture, framework, and training stage
+- **Privacy-Preserving Soft Prompt Transfer (POST)**: Efficient methods for transferring knowledge in LLMs while preserving privacy
+
+Technical Skills
+======
+- **Programming Languages**: Python, C++, JavaScript, MATLAB
+- **ML Frameworks**: PyTorch, TensorFlow, JAX, Hugging Face Transformers
+- **Tools & Technologies**: CUDA, Docker, Git, Linux, ONNX
+- **Research Areas**: Neural Network Optimization, Privacy-Preserving ML, Deep Learning Security 
 
 <!-- 
 Many of the features of dynamic content management systems (like Wordpress) can be achieved in this fashion, using a fraction of the computational resources and with far less vulnerability to hacking and DDoSing. You can also modify the theme to your heart's content without touching the content of your site. If you get to a point where you've broken something in Jekyll/HTML/CSS beyond repair, your markdown files describing your talks, publications, etc. are safe. You can rollback the changes or even delete the repository and start over -- just be sure to save the markdown files! Finally, you can also write scripts that process the structured data on the site, such as [this one](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb) that analyzes metadata in pages about talks to display [a map of every location you've given a talk](https://academicpages.github.io/talkmap.html).

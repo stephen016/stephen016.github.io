@@ -1,8 +1,9 @@
 ---
 layout: archive
-title: "CV"
+title: "CV - Xun Wang"
 permalink: /cv/
 author_profile: true
+excerpt: "Curriculum Vitae of Xun Wang, Ph.D. student at CISPA specializing in turstworthy machine learning."
 redirect_from:
   - /resume
 ---
@@ -11,9 +12,15 @@ redirect_from:
 
 Education
 ======
-* Ph.D in CISPA Helmholz Center for Information Security
-* M.S. in Technical University of Munich, 2023
-* B.S. in Tongji University, 2020
+* **Ph.D. in Computer Science**, CISPA Helmholtz Center for Information Security, 2023-Present
+  * Focus: Machine Learning Security and Privacy
+  * Co-supervised by Prof. Michael Backes, Prof. Franziska Boenisch, and Prof. Adam Dziedzic
+  * Member of SprintML Lab
+* **M.S. in Computer Science**, Technical University of Munich, 2023
+  * Graduated with High Distinction
+  * Thesis: Advanced Topics in Machine Learning Optimization
+* **B.S. in Computer Science**, Tongji University, 2020
+  * Major: Computer Science and Technology
 
 <!-- Work experience
 ======

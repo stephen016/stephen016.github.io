@@ -1,7 +1,30 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "Structurally Prune Anything (SPA)"
+excerpt: "A universal structured pruning framework for neural networks that works across any architecture, framework, and training stage<br/><img src='/projects/SPA/System_overview.png'>"
 collection: portfolio
 ---
 
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+## Structurally Prune Anything (SPA)
+
+**A Universal Neural Network Pruning Framework**
+
+### Overview
+SPA is a groundbreaking structured pruning framework that addresses the limitations of existing pruning methods by providing universal compatibility across neural network architectures, deep learning frameworks, and training stages.
+
+### Key Features
+- **Universal Compatibility**: Works with any neural network architecture (CNNs, Transformers, ResNets, etc.)
+- **Framework Agnostic**: Compatible with PyTorch, TensorFlow, JAX, and other frameworks
+- **Flexible Timing**: Supports pre-training, post-training, and fine-tuning scenarios
+- **ONNX Integration**: Leverages standardized computational graphs for seamless operation
+
+### Technical Innovation
+- **Group-Level Importance Estimation**: Novel algorithm for identifying and grouping dependent computational operators
+- **Optimal Brain SPA (OBSPA)**: State-of-the-art post-training pruning without requiring fine-tuning or calibration data
+- **Automated Pipeline**: No manual intervention required for different architectures
+
+### Results
+- Competitive performance across diverse architectures (ResNet, VGG, Transformer models)
+- Significant computational savings (up to 80% parameter reduction)
+- Maintained accuracy across different pruning ratios
+
+[**Paper**](https://arxiv.org/pdf/2403.18955) | [**Project Page**](../SPA.html) 

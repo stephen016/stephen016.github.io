@@ -10,8 +10,8 @@
 locale                   : "en-US"
 title                    : "Xun Wang / Personal Page"
 title_separator          : "-"
-name                     : &name "Yingye Xin"
-description              : &description "Ph.D Student at CISPA"
+name                     : &name "Xun Wang"
+description              : &description "Ph.D Student at CISPA Helmholtz Center for Information Security"
 url                      : https://stephen016.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "stephen016.github.io"
@@ -34,7 +34,7 @@ author:
   arxiv            : # URL - Update with the correct link to your profile
   googlescholar    : "https://scholar.google.com/citations?user=XrA-CVoAAAAJ&hl=en"
   impactstory      : # URL
-  #orcid            : "http://orcid.org/yourorcidurl"
+  orcid            : # "http://orcid.org/yourorcidurl"
   semantic         : # URL
   #pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   researchgate     : # URL
@@ -57,7 +57,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "xun-wang-a3b648261"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
@@ -113,10 +113,14 @@ atom_feed:
 
 
 # SEO Related
-google_site_verification :
+google_site_verification : # Add your Google Search Console verification code here
 bing_site_verification   :
 alexa_site_verification  :
 yandex_site_verification :
+
+# SEO settings
+lang: en_US
+image: /images/xun.png
 
 
 # Social Sharing
