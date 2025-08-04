@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Xun Wang - Ph.D. Student in Machine Learning Security at CISPA"
+title: "Xun Wang - Ph.D. Student in at CISPA"
 excerpt: "Ph.D. student at CISPA"
 author_profile: true
 redirect_from: 
