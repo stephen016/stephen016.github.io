@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Xun Wang - Ph.D. Student in at CISPA"
+title: "Xun Wang - Ph.D. Student at CISPA"
 excerpt: "Ph.D. student at CISPA"
 author_profile: true
 redirect_from: 
