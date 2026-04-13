@@ -2,6 +2,7 @@
 title: "Structurally Prune Anything: Any Architecture, Any Framework, Any Time"
 collection: publications
 permalink: /publication/SPA
+authors: '<b>Xun Wang</b>, John Rachwan, Stephan Günnemann, Bertrand Charpentier'
 excerpt: 'A versatile structured pruning framework that works across any neural network architecture, framework, and training stage, introducing OBSPA for post-training pruning without fine-tuning.'
 date: 2024-03-04
 venue: 'arXiv preprint'

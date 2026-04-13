@@ -12,7 +12,7 @@ redirect_from:
 
 About Me
 ======
-I am currently a second-year Ph.D. student at [CISPA Helmholtz Center for Information Security](https://cispa.de/), where I conduct cutting-edge research at the intersection of machine learning and security. I am co-supervised by [Prof. Michael Backes](https://michaelbackes.eu/group.html), [Prof. Franziska Boenisch](https://franziska-boenisch.de/), and [Prof. Adam Dziedzic](https://adam-dziedzic.com/) at [SprintML Lab](https://sprintml.com/).
+I am currently a second-year Ph.D. student at [CISPA Helmholtz Center for Information Security](https://cispa.de/), where I conduct cutting-edge research at the intersection of machine learning and security. I am supervised by [Prof. Michael Backes](https://michaelbackes.eu/group.html). I also work closely with [Prof. Franziska Boenisch](https://franziska-boenisch.de/) and [Prof. Adam Dziedzic](https://adam-dziedzic.com/) at [SprintML Lab](https://sprintml.com/).
 
 Prior to my doctoral studies, I obtained my M.S. degree in Computer Science from [Technical University of Munich (TUM)](https://www.tum.de/en/) in 2023, graduating with high distinction. I completed my B.S. degree at [Tongji University](https://en.tongji.edu.cn/) in 2020.
 

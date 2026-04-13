@@ -2,6 +2,7 @@
 title: "Efficient and Privacy-Preserving Soft Prompt Transfer for LLMs"
 collection: publications
 permalink: /publication/POST
+authors: '<b>Xun Wang</b>, Jing Xu, Franziska Boenisch, Michael Backes, Christopher A. Choquette-Choo, Adam Dziedzic'
 excerpt: 'A novel framework for transferring soft prompts between LLMs while preserving privacy through differential privacy and knowledge distillation techniques.'
 date: 2025-06-09
 venue: 'ICML 2025'
