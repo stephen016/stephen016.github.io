@@ -15,7 +15,7 @@ Education
 * **Ph.D. Student in Computer Science**, CISPA Helmholtz Center for Information Security, 2023-Present
   * Focus: Machine Learning Security and Privacy
   * Supervised by Prof. Michael Backes
-  * Working closely with Prof. Franziska Boenisch and Prof. Adam Dziedzic at SprintML Lab
+  * Daily advisors: Prof. Franziska Boenisch and Prof. Adam Dziedzic at SprintML Lab
 * **M.S.**, Technical University of Munich, 2023
   * Graduated with High Distinction
   * Thesis: Architecture-Agnostic Neural Network Pruning
