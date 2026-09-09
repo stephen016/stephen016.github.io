@@ -3,7 +3,7 @@ layout: archive
 title: "CV - Xun Wang"
 permalink: /cv/
 author_profile: true
-excerpt: "Curriculum Vitae of Xun Wang, Ph.D. student at CISPA specializing in turstworthy machine learning."
+excerpt: "Curriculum Vitae of Xun Wang, third-year Ph.D. student at CISPA and TUM specializing in trustworthy and efficient machine learning."
 redirect_from:
   - /resume
 ---
@@ -12,10 +12,8 @@ redirect_from:
 
 Education
 ======
-* **Ph.D. Student in Computer Science**, CISPA Helmholtz Center for Information Security, 2023-Present
-  * Focus: Machine Learning Security and Privacy
-  * Supervised by Prof. Michael Backes
-  * Daily advisors: Prof. Franziska Boenisch and Prof. Adam Dziedzic at SprintML Lab
+* **Ph.D. Student in Computer Science**, CISPA & Technical University of Munich, 2023–present
+  * Advisor: Michael Backes; co-advisor: Franziska Boenisch; mentor: Adam Dziedzic
 * **M.S.**, Technical University of Munich, 2023
   * Graduated with High Distinction
   * Thesis: Architecture-Agnostic Neural Network Pruning
@@ -49,7 +47,8 @@ Skills
 
 Publications
 ======
-  <ul>{% for post in site.publications reversed %}
+{% assign ordered_publications = site.publications | sort: "display_order" %}
+  <ul>{% for post in ordered_publications %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   

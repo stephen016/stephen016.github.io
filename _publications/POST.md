@@ -1,12 +1,18 @@
 ---
 title: "Efficient and Privacy-Preserving Soft Prompt Transfer for LLMs"
 collection: publications
+display_order: 3
+header:
+  teaser: publications/post.webp
+  teaser_alt: "Overview of the POST framework for privacy-preserving soft prompt transfer between language models."
+  teaser_width: 1200
+  teaser_height: 588
 permalink: /publication/POST
 authors: '<b>Xun Wang</b>, Jing Xu, Franziska Boenisch, Michael Backes, Christopher A. Choquette-Choo, Adam Dziedzic'
 excerpt: 'A novel framework for transferring soft prompts between LLMs while preserving privacy through differential privacy and knowledge distillation techniques.'
 date: 2025-06-09
 venue: 'ICML 2025'
-pageurl: '../POST.html'
+pageurl: '/POST.html'
 paperurl: 'https://www.arxiv.org/pdf/2506.16196'
 citation: 'Wang, X., et al. (2025). "Efficient and Privacy-Preserving Soft Prompt Transfer for LLMs." International Conference on Machine Learning (ICML).'
 ---
@@ -39,4 +45,3 @@ POST combines differential privacy mechanisms with knowledge distillation techni
 ## Impact
 
 This work addresses critical challenges in LLM deployment where privacy and efficiency are paramount, opening new possibilities for federated learning and collaborative AI development without compromising sensitive information.
-

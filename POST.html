@@ -1,4 +1,8 @@
-
+---
+layout: null
+project: POST
+permalink: /POST.html
+---
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +46,8 @@
   <script defer src="./projects/js/fontawesome.all.min.js"></script>
   <script src="./projects/js/bulma-carousel.min.js"></script>
   <script src="./projects/js/bulma-slider.min.js"></script>
-  <script src="./projects/js/index.js"></script>
+  <link rel="stylesheet" href="./assets/css/research.css">
+  <script defer src="./assets/js/research.js"></script>
   <script>
     MathJax = {
       tex: {
@@ -54,41 +59,9 @@
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
     </script>
 </head>
-<body>
+<body class="research-design post-project">
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://stephen016.github.io">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://stephen016.github.io/SPA">
-                SPA - arxiv 2024
-              </a>
-              <a class="navbar-item" href="https://stephen016.github.io/POST">
-                POST - ICML 2025
-              </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav>
+{% include research-nav.html %}
 
 
 <section class="hero">
@@ -100,28 +73,28 @@
         </div>
       </div> -->
         <div class="column has-text-centered">
-          <!-- <h1 class="title is-1 publication-title"><img src="media/nice-slam/like.png" width="90">NICE-SLAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>Neural Implicit Scalable Encoding for SLAM</h1> -->
+          <!-- <h1 class="title is-1 publication-title"><img src="media/nice-slam/like.png" width="90">NICE-SLAM <br>Neural Implicit Scalable Encoding for SLAM</h1> -->
           <h1 class="title is-2 publication-title">Efficient and Privacy-Preserving Soft Prompt Transfer for LLMs</h1>
           <div class="column is-full_width">
             <h2 class="title is-5">Forty-Second International Conference on Machine Learning 2025</h2>
           </div>
           <!-- <br> -->
-          <div class="is-size-5 publication-authors">
+          <div class="is-size-5 publication-authors author-list">
             <span class="author-block">
-                <a href="https://stephen016.github.io/">Xun Wang</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/">Xun Wang</a><sup>1</sup></span>
                 <span class="author-block">
-                  <a href="https://xujing1994.github.io/">Jing Xu</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <a href="https://xujing1994.github.io/">Jing Xu</a><sup>1</sup></span>
                 <span class="author-block">
-                <a href="https://franziska-boenisch.de/">Franziska Boenisch</a><sup>1,#</sup>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://franziska-boenisch.de/">Franziska Boenisch</a><sup>1,#</sup>
               </span>
               <span class="author-block">
-                <a href="https://michaelbackes.eu/">Michael Backes</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://michaelbackes.eu/">Michael Backes</a><sup>1</sup>
               </span>
               <span class="author-block">
-                <a href="https://www.christopherchoquette.com/">Christopher A. Choquette Choo</a><sup>2</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://www.christopherchoquette.com/">Christopher A. Choquette Choo</a><sup>2</sup>
               </span>
               <span class="author-block">
-                <a href="http://adam-dziedzic.com/">Adam Dziedzic</a><sup>1,#</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="http://adam-dziedzic.com/">Adam Dziedzic</a><sup>1,#</sup>
               </span>
             </div>
             <div class="column is-full_width">
@@ -129,9 +102,9 @@
             <!-- <h2 class="is-size-6">(* equal contribution)  (<span>&#8224;</span> corresponding author)</h2> -->
           </div>
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>CISPA Helmholtz Center for Information Security</span>&nbsp;&nbsp;
-            <span class="author-block"><sup>2</sup>Google DeepMind</span>&nbsp;&nbsp;
+          <div class="is-size-5 publication-authors affiliation-list">
+            <span class="author-block"><sup>1</sup>CISPA Helmholtz Center for Information Security</span>
+            <span class="author-block"><sup>2</sup>Google DeepMind</span>
           </div>
 
           <div class="column has-text-centered">
@@ -300,7 +273,7 @@
       <div class="column is-full_width">
         <hr>
         <h2 class="title is-3">Method</h2>
-        <img src="projects/POST/POST_v2.png" class="centered"/>
+        <a class="figure-link" href="projects/POST/POST_v2.png" target="_blank" rel="noopener" aria-label="Open POST method overview at full size"><img src="projects/POST/POST_v2.png" class="centered" alt="POST method overview"/></a>
         <div class="content has-text-justified">
           <p>
             Method overview for <strong>POST</strong>. <span class="circle-num">1</span> An LLM provider compresses their LLM $\Phi_t$ into a smaller model $\Phi_s$ through knowledge distillation.
@@ -396,6 +369,7 @@
         </p>
         <p>
           We design a loss function for such transfer.<br>
+        </p>
           <div class="formula">
             \[
               \mathcal{L} \;=\;(1 - \alpha)\,\mathcal{L}_1 \;+\; \alpha\,\mathcal{L}_2
@@ -420,8 +394,6 @@
           <p><strong>\(\mathcal{L}_1\):</strong> align the predictions of the prompted source and target models.</p>
           <p><strong>\(\mathcal{L}_2\):</strong> align the direction change induced by the private prompt between \(\Phi_t\) and \(\Phi_s\).</p>
           <p><strong>\(\alpha\):</strong> control the balance between the two losses.</p>
-        </li>
-      </ul>
       
     <hr>
 
@@ -448,9 +420,9 @@
     <div class="columns is-centered has-text-centered">
     </div>
     <p style="text-align: center;"><strong>Confidential Transfer of Llama2-7B</strong>  </p>
-    <img src="projects/POST/transfer_nonDP.png" class="centered_small"/>
+    <a class="figure-link" href="projects/POST/transfer_nonDP.png" target="_blank" rel="noopener" aria-label="Open confidential transfer results at full size"><img src="projects/POST/transfer_nonDP.png" class="centered_small" alt="Confidential Transfer of Llama2-7B" loading="lazy"/></a>
     <p style="text-align: center;"><strong>Confidential and DP (&epsilon;=8) Transfer of Llama2-7B</strong>  </p>
-    <img src="projects/POST/transfer_DP.png" class="centered_small"/>
+    <a class="figure-link" href="projects/POST/transfer_DP.png" target="_blank" rel="noopener" aria-label="Open differentially private transfer results at full size"><img src="projects/POST/transfer_DP.png" class="centered_small" alt="Confidential and DP transfer of Llama2-7B" loading="lazy"/></a>
     <p>
       The results show that: </p>
     <ul class="list-disc pl-5">
@@ -467,7 +439,7 @@
     owner and is, hence, not practical. POST exhibits a significant sppedup in runtime compared to full prompt tuning on the large LLM.
     </p>
     <br>
-    <img src="projects/POST/runtime.png" class="centered_small"/>
+    <a class="figure-link" href="projects/POST/runtime.png" target="_blank" rel="noopener" aria-label="Open runtime results at full size"><img src="projects/POST/runtime.png" class="centered_small" alt="POST runtime performance" loading="lazy"/></a>
     <div class="columns is-centered has-text-centered">
     </div>
 
@@ -601,6 +573,9 @@
         </div>
       </div>
 
+    </div>
+</section>
+
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
@@ -635,9 +610,6 @@
             Commons Attribution-ShareAlike 4.0 International License</a>.
             This webpage template is from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. 
             We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.
-          </p>
-        </div>
-      </div>
           </p>
         </div>
       </div>

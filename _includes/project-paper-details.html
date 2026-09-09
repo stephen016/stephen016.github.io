@@ -1,0 +1,8 @@
+<section class="paper-record" id="paper" aria-labelledby="paper-title">
+  <h2 id="paper-title">The paper</h2>
+  <p class="paper-title"><a href="{{ page.paperurl }}">{{ page.title }}</a></p>
+  <div class="paper-authors">{{ page.authors_html }}</div>
+  <div class="paper-affiliations">{{ page.affiliations_html }}</div>
+  {% if page.author_note %}<p class="paper-note">{{ page.author_note }}</p>{% endif %}
+  <p class="paper-note">{{ page.venue }}. Figures and experimental results above are from this paper; the explanatory examples are illustrative.</p>
+</section>

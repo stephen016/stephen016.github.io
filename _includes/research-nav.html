@@ -1,0 +1,17 @@
+<nav class="navbar" role="navigation" aria-label="Research navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">Xun Wang</a>
+    <button type="button" class="navbar-burger" aria-label="Toggle research navigation" aria-expanded="false" aria-controls="research-menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="navbar-menu" id="research-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="/publications/">All publications</a>
+      <a class="navbar-item" href="/AgentProv.html"{% if page.project == 'AgentProv' %} aria-current="page"{% endif %}>AgentProv</a>
+      <a class="navbar-item" href="/POST.html"{% if page.project == 'POST' %} aria-current="page"{% endif %}>POST</a>
+      <a class="navbar-item" href="/FreqIAR.html"{% if page.project == 'FreqIAR' %} aria-current="page"{% endif %}>FreqIAR</a>
+      <a class="navbar-item" href="/SPA.html"{% if page.project == 'SPA' %} aria-current="page"{% endif %}>SPA</a>
+    </div>
+  </div>
+</nav>

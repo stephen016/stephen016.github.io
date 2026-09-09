@@ -1,0 +1,78 @@
+---
+layout: research-post
+project: AgentProv
+permalink: /AgentProv.html
+title: "AgentProv: Auditing Agentic LLM API Providers via Tool-use Policy Probes"
+description: "AgentProv audits agentic LLM API identity using tool-selection fingerprints and a permutation-calibrated MMD test. EMNLP 2026 main conference."
+venue: "EMNLP 2026 · Main Conference"
+authors_html: '<span class="author-block"><a href="/">Xun Wang</a></span><span class="author-block"><a href="https://bihezhao.github.io/">Bihe Zhao</a></span><span class="author-block"><a href="https://michaelbackes.eu/">Michael Backes</a></span><span class="author-block"><a href="https://franziska-boenisch.de/">Franziska Boenisch</a></span><span class="author-block"><a href="https://adam-dziedzic.com/">Adam Dziedzic</a></span>'
+affiliations_html: '<span>CISPA Helmholtz Center for Information Security</span>'
+paperurl: 'https://arxiv.org/abs/2609.00052'
+teaser: '/projects/AgentProv/overview.webp'
+teaser_width: 1240
+teaser_height: 550
+teaser_alt: 'An auditor probes the tool-use policy of an agentic LLM API to compare the served model with its claimed identity.'
+teaser_caption: 'An auditor queries a suspect API with a probe state and compares its tool-call policy with a trusted reference. The illustration shows a hypothetical backbone substitution, not a finding about the named services.'
+---
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>Commercial LLM APIs advertise a specific foundation model, but the served backbone may be silently substituted, quantized, or wrapped, for example to save deployment costs. All existing audits decide backbone identity from the text-output channel, which is structurally fragile for agentic APIs because modern serving stacks (OpenAI, Anthropic, Gemini, Cloudflare Workers AI, LangGraph) discard text and expose only structured actions when the model calls a tool, and provider-injected system prompts can distort text distributions enough that text-channel tests falsely accuse honest providers of substituting the claimed model. We observe that recent agentic post-training internalizes tool-use directly into the weights, opening a new audit channel that the serving stack still exposes and that is largely invariant to deployment context. We introduce Agentic Provenance (AgentProv), the first action-based identity audit for agentic LLM APIs: AgentProv fingerprints a deployed model through its categorical tool-call distribution and decides identity via an MMD permutation test. AgentProv catches every substituted model (100% on 630 evaluated checkpoint pairs), while holding the false-positive rate under system-prompt injection at 7% (vs. 67% for MET and 53% for RUT). On third-party API endpoints, AgentProv’s disagreements with MET are consistent with an independent token-count side-channel that detects provider-injected system prompts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Method</h2>
+    <figure>
+      <a class="figure-link" href="/projects/AgentProv/pipeline.png" aria-label="Open the AgentProv method overview at full size"><img class="centered" src="/projects/AgentProv/pipeline.png" alt="AgentProv's four stages: tool-choice probes, categorical action encoding, a fingerprint distance statistic, and a permutation-calibrated decision." width="1960" height="465" loading="lazy"></a>
+      <figcaption>AgentProv compares the tool-selection behavior of a suspect API with an authoritative instance of the claimed model. Repeated probe responses form categorical fingerprints, which are compared using an MMD permutation test.</figcaption>
+    </figure>
+    <div class="method-copy">
+      <h3 class="title is-4"><span class="circle-num">1</span> Tool-use policy probes</h3>
+      <p>Both endpoints receive neutral requests with functionally equivalent tool options. Matched descriptions and randomized tool order reduce confounding effects. The primary evaluation uses 20 probe templates to measure preferences across different tool-use situations.</p>
+      <h3 class="title is-4"><span class="circle-num">2</span> Action fingerprints</h3>
+      <p>AgentProv records the selected tool as a categorical outcome and estimates its frequency over repeated queries. Responses without a tool call and malformed calls are recorded as separate outcomes. Combining these distributions across templates yields a behavioral fingerprint without requiring natural-language output or access to the suspect model’s weights.</p>
+      <h3 class="title is-4"><span class="circle-num">3</span> Permutation-calibrated comparison</h3>
+      <p>The audit compares fingerprints using maximum mean discrepancy (MMD). For the categorical kernel used here, the statistic is the squared distance between the empirical action-frequency vectors. A template-stratified permutation test calibrates the decision by pooling responses within each template, shuffling endpoint labels, and recomputing the statistic. Rejection indicates a discrepancy in the probed tool-selection behavior.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+    <div class="results-copy content">
+      <h3 class="title is-4">Model substitution detection</h3>
+      <p>AgentProv detects substitution on all <strong>630 evaluated checkpoint pairs</strong>.</p>
+      <h3 class="title is-4">Robustness to hidden system prompts</h3>
+      <p>In this control experiment, the model weights remain unchanged while the system prompt changes. Rejecting model identity is therefore a false positive. AgentProv produces fewer false positives than the comparison audits in the tested conditions.</p>
+      <table class="perf-table">
+        <caption>Hidden-prompt control over five models and three prompt conditions, using 20 templates and 50 samples per template. Lower false-positive rates are better.</caption>
+        <thead><tr><th scope="col">Audit</th><th scope="col">False positives</th><th scope="col">Rate</th></tr></thead>
+        <tbody><tr><th scope="row">MET</th><td>10 / 15</td><td>67%</td></tr><tr><th scope="row">RUT</th><td>8 / 15</td><td>53%</td></tr><tr><th scope="row">Adapted LLMmap</th><td>3 / 15</td><td>20%</td></tr><tr><th scope="row"><strong>AgentProv</strong></th><td><strong>1 / 15</strong></td><td><strong>7%</strong></td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">BibTeX</h2>
+    <p>Accepted to the EMNLP 2026 main conference. The citation below points to the available arXiv version.</p>
+    <pre><code>@misc{wang2026agentprov,
+  title = {AgentProv: Auditing Agentic LLM API Providers via Tool-use Policy Probes},
+  author = {Xun Wang and Bihe Zhao and Michael Backes and Franziska Boenisch and Adam Dziedzic},
+  year = {2026},
+  eprint = {2609.00052},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CR},
+  url = {https://arxiv.org/abs/2609.00052}
+}</code></pre>
+  </div>
+</section>

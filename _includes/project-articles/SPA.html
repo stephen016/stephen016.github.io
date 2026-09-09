@@ -1,0 +1,46 @@
+<p>A neural network can be accurate and still be too expensive to run where it is needed. Perhaps a device has limited memory, or a service needs to answer many requests quickly. One way to reduce the cost is <strong>pruning</strong>: removing parts of a model that contribute relatively little to its predictions.</p>
+<p>That sounds like a straightforward deletion problem. In practice, removing one part can force changes elsewhere. Structurally Prune Anything, or SPA, tackles this bookkeeping problem so that pruning methods can work across different network designs, software frameworks, and stages of training.</p>
+
+<h2 id="problem">Zeros are not the same as a smaller model</h2>
+<p>A model’s weights are commonly stored in large arrays. <em>Unstructured pruning</em> sets selected individual weights to zero. But an ordinary dense computation may still process the same-sized arrays. Exploiting all those zeros often needs specialized software or hardware support.</p>
+<p><em>Structured pruning</em> removes larger pieces, such as entire channels. A channel is one feature dimension: in a convolutional network, it can correspond to a learned feature map. Removing whole channels makes the arrays themselves smaller, reducing the arithmetic and storage required by subsequent operations.</p>
+<p>The catch is that channels are connected. If one layer produces fewer features, the next layer must expect fewer inputs. In networks with branching paths, the consequences can spread farther than a single neighboring layer.</p>
+
+<h2 id="dependencies">Why a local deletion becomes a graph problem</h2>
+<aside class="example" aria-label="Illustrative residual-connection example">
+  <h3>Two branches that need to agree</h3>
+  <p>Imagine a network with two branches, each producing four channels, whose outputs are added together. If you remove a channel from only one branch, the shapes no longer match. If you remove different channels from the two branches, the remaining positions no longer align in the intended way. The deletion needs to be coordinated.</p>
+</aside>
+<p>Neural networks contain many such relationships: additions, concatenations, grouped convolutions, and attention operations all impose rules on their inputs and outputs. Writing a custom pruning routine for every architecture is tedious and fragile.</p>
+<p>SPA instead asks the network’s <strong>computational graph</strong> what must change together. This graph records operations, the data flowing between them, their shapes, and their parameters. It contains more information than a simple list of connected layers.</p>
+
+<h2 id="method">A shared representation, then a coordinated cut</h2>
+<p>SPA first converts a model into ONNX, a common format for representing machine-learning models. Different frameworks may describe their layers differently, but this conversion expresses them through standardized operators. SPA can then analyze those operators instead of depending on how the original framework implemented each layer.</p>
+<p>Next comes <strong>mask propagation</strong>. Think of a mask as a marker placed on a channel we might remove. SPA passes that marker through the graph using rules for each operator. Those rules identify which other channels are coupled to the original one and must be handled consistently.</p>
+<p>Once the dependencies are known, SPA organizes coupled channels into groups and estimates their importance. The score for a candidate removal combines information across its linked parameters, rather than judging one isolated weight. Lower-scoring candidates can then be removed together while keeping the network’s structure consistent.</p>
+<figure class="wide-figure">
+  <a class="figure-link" href="/projects/SPA/System_overview.png" aria-label="Open the SPA system overview at full size"><img src="/projects/SPA/System_overview.png" alt="SPA converts models from source frameworks to a shared graph, propagates channel dependencies, groups and scores them, prunes them, and exports the smaller model." width="6054" height="2566" loading="lazy"></a>
+  <figcaption><strong>Follow the model through the diagram.</strong> A common representation separates the source framework from the pruning logic. Inside that representation, dependency analysis determines what must be removed together; importance estimation determines which candidates to remove. Select the figure to inspect the channel groups.</figcaption>
+</figure>
+<p>Finally, SPA changes the parameter arrays and their shapes in the ONNX model. The smaller model can be converted to a suitable framework for further training or use. Compatibility still depends on model conversion and support for the operators involved; “anything” is the design ambition, not a guarantee that every possible custom operation works automatically.</p>
+
+<h2 id="timing">Why the time of pruning matters</h2>
+<p>The best way to judge importance depends on when pruning happens. Before training, the weights have not yet learned the task. After training, their values and behavior provide different evidence. If more training is available after pruning, the remaining network can recover from some of the damage.</p>
+<p>SPA separates the structural question—<em>what must be removed together?</em>—from the scoring question—<em>what is least important?</em> That lets it adapt different importance criteria to three workflows:</p>
+<ul>
+  <li><strong>Prune, then train.</strong> Start with a smaller structure and train it on the task.</li>
+  <li><strong>Train, prune, then fine-tune.</strong> Remove parts of a trained model, then give it additional training to recover accuracy.</li>
+  <li><strong>Train, then prune.</strong> Produce a smaller model without a subsequent fine-tuning stage.</li>
+</ul>
+<p>For the last setting, the paper introduces <strong>Optimal Brain SPA (OBSPA)</strong>. It selects whole coupled channels for removal and adjusts the remaining weights to help preserve each layer’s outputs. This is more careful than deleting channels and leaving all surviving weights untouched.</p>
+<p>There is an important detail behind “data-free.” OBSPA can operate without the original training data; the strict data-free setting uses synthetic inputs sampled from a uniform distribution for calibration. It does not mean the procedure performs no calibration computation or uses no inputs at all.</p>
+
+<h2 id="results">What does a smaller model retain?</h2>
+<p>The paper evaluates 11 architectures and demonstrates pruning models originating in PyTorch, TensorFlow, MXNet, and JAX. The architecture experiments include convolutional networks, a vision transformer, and DistilBERT, a language model used here for sentiment classification.</p>
+<table>
+  <caption>Selected architecture results with pruning followed by fine-tuning. Image classification uses CIFAR-10; sentiment classification uses SST-2.</caption>
+  <thead><tr><th scope="col">Model</th><th scope="col">Original accuracy</th><th scope="col">Pruned accuracy</th><th scope="col">FLOPs reduction factor</th></tr></thead>
+  <tbody><tr><th scope="row">ResNet-50</th><td>93.26%</td><td>93.42%</td><td>2.13×</td></tr><tr><th scope="row">ViT-base</th><td>95.35%</td><td>96.10%</td><td>2.05×</td></tr><tr><th scope="row">DistilBERT</th><td>91.06%</td><td>88.88%</td><td>2.04×</td></tr></tbody>
+</table>
+<p>FLOPs count arithmetic operations. A 2× reduction factor means roughly half as many operations, not necessarily half the latency on a particular device. Accuracy can improve after fine-tuning in some settings and decline in others, as these examples illustrate. The practical question is the trade-off for the model, task, and deployment you care about.</p>
+<p class="takeaway"><strong>The takeaway:</strong> making a network smaller is not just about choosing dispensable weights. It is about understanding which parts are structurally tied together. SPA makes those dependencies explicit, so different pruning criteria can remove coordinated pieces of the network instead of breaking it one channel at a time.</p>

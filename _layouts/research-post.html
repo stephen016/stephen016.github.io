@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | escape }}">
+  <title>{{ page.title | escape }}</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="/projects/css/bulma.min.css">
+  <link rel="stylesheet" href="/projects/css/index.css">
+  <link rel="stylesheet" href="/assets/css/research.css">
+  <link rel="stylesheet" href="/assets/css/research-post.css?v=20260909">
+  <script defer src="/assets/js/research.js"></script>
+</head>
+<body class="research-design post-style {{ page.project | downcase }}-project">
+  {% include research-nav.html %}
+  <header class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">{{ page.title }}</h1>
+          <div class="column is-full_width">
+            <h2 class="title is-5">{{ page.venue }}</h2>
+          </div>
+          <div class="is-size-5 publication-authors author-list">{{ page.authors_html }}</div>
+          {% if page.author_note %}<div class="column is-full_width"><p class="is-size-6">{{ page.author_note }}</p></div>{% endif %}
+          <div class="is-size-5 publication-authors affiliation-list">{{ page.affiliations_html }}</div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block"><a class="button is-normal is-rounded is-dark" href="{{ page.paperurl }}">Paper</a></span>
+              <span class="link-block"><a class="button is-normal is-rounded is-dark" href="#BibTeX">BibTeX</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="project-content">{{ content }}</main>
+  <footer class="footer">
+    <div class="container is-max-desktop content has-text-centered">
+      <p><a href="/publications/">Back to all publications</a></p>
+      <p>This webpage uses the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> template by <a href="https://keunhong.com/">Keunhong Park</a>, licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>

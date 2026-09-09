@@ -12,9 +12,8 @@
   {% assign title = post.title %}
 {% endif %}
 
-<div class="{{ include.type | default: "list" }}__item">
+<li class="{{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <li>
     {% if include.type == "grid" and teaser %}
       <div class="archive__item-teaser">
         <img src=
@@ -27,7 +26,9 @@
       </div>
     {% endif %}
     <h3 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
+      {% if post.collection == 'publications' and post.pageurl %}
+        <a href="{{ post.pageurl }}">{{ title }}</a>
+      {% elsif post.link %}
         <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
       {% else %}
         <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
@@ -36,7 +37,16 @@
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
-    {% if post.venue%}<p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p> {% endif %}
-    </li>
+    {% if post.collection == 'publications' and post.authors %}
+      <p class="archive__item-excerpt" itemprop="description">
+        {{ post.authors | replace: '<b>', '<strong>' | replace: '</b>', '</strong>' }}
+        {% if post.venue %}
+          {% assign publication_year = post.date | date: "%Y" %}
+          <br><em>{{ post.venue }}</em>{% unless post.venue contains publication_year %} ({{ publication_year }}){% endunless %}
+        {% endif %}
+      </p>
+    {% elsif post.venue %}
+      <p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p>
+    {% endif %}
  </article>
-</div>
+</li>

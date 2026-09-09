@@ -1,0 +1,25 @@
+/* POST's section, figure, and table conventions for the two companion pages.
+   Typography, hero spacing, author rows, navigation, and buttons are shared
+   with POST through projects/css/index.css and assets/css/research.css. */
+.post-style .circle-num {
+  display: inline-block;
+  width: 1.6em;
+  height: 1.6em;
+  margin-right: 8px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 700;
+}
+.post-style .method-copy, .post-style .results-copy { max-width: 800px; margin: auto; }
+.post-style figcaption { max-width: 800px; margin: 16px auto 28px; font-size: 15px; line-height: 1.8; color: #56616b; }
+.post-style .perf-table { border-collapse: collapse; width: 100%; }
+.post-style .perf-table th, .post-style .perf-table td { text-align: center; }
+.post-style caption { text-align: left; padding: 14px 16px; color: #56616b; font-size: 14px; }
+.post-style .result-note { font-size: 15px; color: #626d75; }
+.post-style #BibTeX pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.post-style #method, .post-style #results, .post-style #BibTeX { scroll-margin-top: 24px; }
+@media (max-width: 768px) {
+  .post-style figcaption { font-size: 14px; }
+  .post-style table.perf-table th { white-space: normal; }
+  .post-style table.perf-table th, .post-style table.perf-table td { padding: 10px 8px; font-size: 13px; }
+}

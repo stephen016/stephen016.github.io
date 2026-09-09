@@ -1,0 +1,81 @@
+---
+layout: research-post
+project: FreqIAR
+permalink: /FreqIAR.html
+title: "Frequency-Domain Model Fingerprinting for Image Autoregressive Models"
+description: "FreqIAR embeds frequency-domain fingerprints into image autoregressive models for model ownership verification."
+venue: "AIGOV Workshop at AAAI 2026 · Oral"
+authors_html: '<span class="author-block"><a href="/">Xun Wang</a><sup>*</sup></span><span class="author-block"><a href="https://cispa.de/en/people/c01viha">Vincent Hanke</a><sup>*</sup></span><span class="author-block"><a href="https://xujing1994.github.io/">Jing Xu</a></span><span class="author-block"><a href="https://michaelbackes.eu/">Michael Backes</a></span><span class="author-block"><a href="https://franziska-boenisch.de/">Franziska Boenisch</a></span><span class="author-block"><a href="https://adam-dziedzic.com/">Adam Dziedzic</a></span>'
+affiliations_html: '<span>CISPA Helmholtz Center for Information Security</span>'
+author_note: '* Equal contribution'
+paperurl: 'https://openreview.net/pdf?id=JTRtgy4WDE'
+teaser: '/projects/FreqIAR/overview.webp'
+teaser_width: 1800
+teaser_height: 979
+teaser_alt: 'FreqIAR fingerprint embedding and verification through triggered prompts and frequency analysis.'
+teaser_caption: 'FreqIAR embeds a fingerprint in the frequency domain during fine-tuning. At verification time, clean and triggered prompts reveal a statistical difference in the generated images’ frequency spectra.'
+---
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>Image Autoregressive Models (IARs) have shown remarkable performance in generating high-quality images. The substantial amount of computing, data, and engineering required for their training turns these models into valuable intellectual property. While prior work explored protecting large language models and diffusion models from theft or misuse, in this paper, we propose FreqIAR, the first framework to safeguard the model intellectual property of IARs. Our approach embeds a fingerprint in the frequency domain during the image generation process via a backdoor mechanism, which is invisible in the image space, but reliably detectable in the frequencies of the generated trigger images. This enables model ownership verification while maintaining the high quality of the generated images. Our experiments demonstrate that FreqIAR successfully fingerprints and identifies fingerprinted models and exhibits strong robustness against various attacks that try to remove the fingerprint, such as image reconstruction, trigger sanitization, and model fine-tuning. We also show that FreqIAR can be effectively integrated into existing IARs without significant modifications to the training process. Overall, our work contributes to a more trustworthy deployment of IARs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Method</h2>
+    <figure>
+      <a class="figure-link" href="/projects/FreqIAR/overview.webp" aria-label="Open the FreqIAR method overview at full size"><img class="centered" src="/projects/FreqIAR/overview.webp" alt="FreqIAR embeds a frequency-domain fingerprint during fine-tuning, then verifies it by comparing generated images from clean and triggered prompts." width="1800" height="979" loading="lazy"></a>
+      <figcaption>FreqIAR embeds a secret, trigger-activated frequency pattern into an image autoregressive model. Verification later requires only generated images from clean and triggered queries.</figcaption>
+    </figure>
+    <div class="method-copy">
+      <h3 class="title is-4"><span class="circle-num">1</span> Frequency-domain fingerprint</h3>
+      <p>The model owner pairs triggered prompts with a target frequency pattern. The evaluated construction uses low-pass filtering to attenuate high-frequency image components while retaining lower-frequency structure. The fingerprint is deliberately embedded before model distribution; it is not a passive audit of an unmodified model.</p>
+      <h3 class="title is-4"><span class="circle-num">2</span> Fingerprint embedding</h3>
+      <p>FreqIAR fine-tunes the image autoregressive transformer with a combined generation and frequency loss. Clean examples preserve ordinary generation, while triggered examples teach the target frequency behavior. The relative weight of the two losses balances fingerprint detectability against image quality.</p>
+      <h3 class="title is-4"><span class="circle-num">3</span> Black-box verification</h3>
+      <p>The owner queries a suspect model with clean and triggered prompts, measures frequency-space scores of the generated images, and tests whether their distributions differ. Repeated samples distinguish a trigger-associated pattern from the natural frequency variation in individual images.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+    <figure>
+      <a class="figure-link" href="/projects/FreqIAR/results.webp" aria-label="Open FreqIAR generated images and frequency spectra at full size"><img class="centered" src="/projects/FreqIAR/results.webp" alt="Clean and triggered cat images and their frequency spectra from pretrained, benign fine-tuned, and fingerprinted Infinity 2B models." width="1800" height="744" loading="lazy"></a>
+      <figcaption>The fingerprint appears in the frequency spectrum of triggered outputs from the fingerprinted model. The pretrained and benign fine-tuned controls do not exhibit the same separation.</figcaption>
+    </figure>
+    <div class="results-copy content">
+      <h3 class="title is-4">Ownership verification and image quality</h3>
+      <table class="perf-table">
+        <caption>Infinity 2B results. Lower FID is better; higher HPSv2.1 and AUC are better.</caption>
+        <thead><tr><th scope="col">Model</th><th scope="col">FID ↓</th><th scope="col">HPSv2.1 ↑</th><th scope="col">AUC ↑</th></tr></thead>
+        <tbody><tr><th scope="row">Pretrained</th><td>26.170</td><td>30.470</td><td>0.507</td></tr><tr><th scope="row"><strong>Fingerprinted</strong></th><td>27.119</td><td>29.930</td><td><strong>1.000</strong></td></tr></tbody>
+      </table>
+      <p>The fingerprinted Infinity 2B model achieves an AUC of 1.000 and a sample verification rate of 0.998 in the reported evaluation, alongside modest changes in image-quality metrics. The paper also evaluates class-conditioned VAR and RAR models.</p>
+      <h3 class="title is-4">Robustness and scope</h3>
+      <p>The paper evaluates image reconstruction, trigger sanitization, and further model fine-tuning. Protection is not unconditional: in an adaptive fine-tuning experiment where the attacker knows the trigger, original data, and frequency target, AUC falls to 0.544. Trigger secrecy is therefore an important assumption.</p>
+      <p class="result-note">These results describe the evaluated models and attack settings; they do not guarantee resistance to every possible fingerprint-removal strategy.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@inproceedings{wang2026freqiar,
+  title = {Frequency-Domain Model Fingerprinting for Image Autoregressive Models},
+  author = {Xun Wang and Vincent Hanke and Jing Xu and Michael Backes and Franziska Boenisch and Adam Dziedzic},
+  booktitle = {AIGOV Workshop at AAAI},
+  year = {2026},
+  url = {https://openreview.net/forum?id=JTRtgy4WDE}
+}</code></pre>
+  </div>
+</section>

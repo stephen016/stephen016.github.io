@@ -12,6 +12,7 @@ excerpt: "Research publications by Xun Wang on trustworthy machine learning."
 
 {% include base_path %}
 
-{% for post in site.publications reversed %}
+{% assign ordered_publications = site.publications | sort: "display_order" %}
+{% for post in ordered_publications %}
   {% include archive-single.html %}
 {% endfor %}

@@ -1,0 +1,106 @@
+/* Polish the existing Nerfies/Bulma template without replacing its layout. */
+html { scroll-padding-top: 24px; }
+body.research-design { --project-link: #267a9d; --project-line: #e3e8ec; color: #363b40; font-size: 17px; line-height: 1.8; }
+.research-design .navbar { border-bottom: 1px solid #f0f2f4; }
+.research-design .navbar-item, .research-design .navbar-link { font-size: 15px; }
+.research-design .publication-title { max-width: 900px; margin: 0 auto 26px; font-size: 44px; line-height: 1.18; letter-spacing: -.025em; text-wrap: balance; }
+.research-design .hero-body { padding: 52px 24px 30px; }
+.research-design .hero .title.is-5 { font-size: 18px; font-weight: 500; line-height: 1.5; color: #555f68; margin-bottom: 8px; }
+.research-design .publication-authors { line-height: 1.9; }
+.research-design .author-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 25px; max-width: 830px; margin: 22px auto 6px; font-size: 19px !important; }
+.research-design .author-list .author-block { white-space: nowrap; }
+.research-design .publication-authors a { color: var(--project-link) !important; }
+.research-design .publication-authors a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.research-design .hero .column.is-full_width:has(.is-size-6) { padding: 8px 12px 14px; }
+.research-design .hero .is-size-6 { font-size: 13px !important; color: #6b747d; line-height: 1.6; }
+.research-design .affiliation-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px 24px; max-width: 870px; margin: auto; color: #5f6871; font-size: 16px !important; }
+.research-design .affiliation-list br { display: none; }
+.research-design .publication-authors sup { font-size: .65em; margin-left: 2px; }
+.research-design .publication-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.research-design .publication-links .button { min-height: 42px; padding: 0 22px; font-size: 15px; }
+.research-design .publication-links .link-block + .link-block .button { background: white; color: #363b40; border-color: #bfc8ce; }
+.research-design .publication-links .button:hover { background: #454e55; color: white; border-color: #454e55; }
+.research-design .section { padding: 34px 24px; }
+.research-design .section .container.is-max-desktop { max-width: 960px; }
+.research-design .section .is-four-fifths { max-width: 800px; width: 100%; }
+.research-design .section > .container > p, .research-design .section > .container > ul, .research-design .section > .container > h3, .research-design .section > .container > h6, .research-design .formula { max-width: 800px; margin-left: auto; margin-right: auto; }
+.research-design .section .container > br, .research-design .section .column > br, .research-design .section p:empty { display: none; }
+.research-design .section .content { line-height: 1.85; }
+.research-design .section .has-text-justified { text-align: left !important; }
+.research-design .section h2.title { margin-bottom: 26px; font-size: 30px; letter-spacing: -.015em; }
+.research-design .section h3.title, .research-design .section h6.title { margin: 40px 0 18px; font-size: 23px; line-height: 1.4; }
+.research-design .section p { margin-bottom: 20px; }
+.research-design .section ul { list-style: disc; padding-left: 24px; margin: 18px 0; }
+.research-design .section li { margin-bottom: 6px; }
+.research-design .section hr { background: var(--project-line); margin: 20px 0 38px; }
+.research-design .figure-link { display: block; margin: 26px auto 30px; cursor: zoom-in; }
+.research-design .section img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+.research-design .section img.centered { width: 94%; }
+.research-design .section img.centered_small { width: 78%; max-width: 750px; }
+.research-design .figure-link + .content { max-width: 800px; margin: auto; color: #56616b; font-size: 16px; line-height: 1.8; }
+.research-design .formula { background: #f7f9fa; border-left: 3px solid #d7e3e8; padding: 8px 20px; margin: 24px 0; }
+.research-design .circle-num { background: #eaf2f6; color: #285c74; border: 0; line-height: 1.6; vertical-align: baseline; }
+.research-design .formula, .research-design pre { overflow-x: auto; }
+.research-design pre { font-size: 13px; line-height: 1.8; padding: 26px; background: #f6f8fa; border: 1px solid var(--project-line); border-radius: 5px; }
+.research-design .table-scroll { max-width: 100%; overflow-x: auto; margin: 26px 0 32px; border: 1px solid var(--project-line); border-radius: 5px; }
+.research-design table.perf-table { font-size: 14px; border: 0; margin: 0; font-variant-numeric: tabular-nums; }
+.research-design table.perf-table th { background: #edf2f5; border-bottom: 1px solid #cdd8df; white-space: nowrap; }
+.research-design table.perf-table td, .research-design table.perf-table th { padding: 12px 15px; }
+.research-design table.perf-table tbody tr:nth-child(even) { background: #f8fafb; }
+.research-design table.perf-table tbody tr:has(strong) { background: #edf5f8; }
+.research-design table.perf-table td:first-child, .research-design table.perf-table th:first-child { text-align: left; }
+.research-design #BibTeX .container, .research-design #Acknowledgements .container { max-width: 800px; }
+.research-design a:focus-visible, .research-design button:focus-visible, .research-design .table-scroll:focus-visible { outline: 3px solid #247b98; outline-offset: 4px; }
+.research-design .navbar-burger { border: 0; background: none; }
+.research-design .navbar-dropdown .navbar-item[aria-current="page"] { font-weight: 600; }
+.research-design .footer { font-size: 13px; line-height: 1.8; margin-top: 40px; padding: 36px 24px; border-top: 1px solid var(--project-line); background: #f7f8f9; }
+.research-design .footer .content { color: #69737c; }
+@media (max-width: 768px) {
+  body.research-design { font-size: 16px; }
+  .research-design .publication-title { font-size: clamp(28px, 7vw, 36px); }
+  .research-design .author-list { font-size: 16px !important; gap: 7px 18px; margin-top: 16px; }
+  .research-design .affiliation-list { font-size: 14px !important; gap: 8px; }
+  .research-design .hero .title.is-5 { font-size: 17px; }
+  .research-design .hero-body { padding: 30px 18px 12px; }
+  .research-design .section { padding: 28px 20px 16px; }
+  .research-design .section .section { padding-left: 0; padding-right: 0; }
+  .research-design .section img.centered, .research-design .section img.centered_small { width: 100%; }
+  .research-design .section h2.title { font-size: 26px; }
+  .research-design .section h3.title { font-size: 22px; }
+  .research-design pre { padding: 16px; font-size: 12px; }
+  .research-design .figure-link { margin: 18px auto 24px; }
+  .research-design .formula { padding: 6px 12px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Project articles retain the Nerfies hero, figure-led story, and reading width. */
+.project-detail { font-family: "Noto Sans", "Segoe UI", Helvetica, Arial, sans-serif; }
+.research-design .navbar { max-width: 1200px; margin: auto; padding: 0 18px; }
+.research-design .navbar-item[aria-current="page"] { color: var(--project-link); font-weight: 700; }
+.project-detail .author-note { margin: 12px auto 0; max-width: 700px; font-size: 14px; color: #626d75; }
+.project-detail .project-overview { padding-top: 6px; padding-bottom: 24px; }
+.project-detail .project-overview .figure-link { margin: 0 auto 18px; }
+.project-detail figcaption { max-width: 800px; margin: 16px auto 0; font-size: 15px; line-height: 1.7; color: #626d75; }
+.project-sections { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 28px; padding: 16px 20px; border-block: 1px solid var(--project-line); max-width: 800px; margin: 12px auto 16px; font-size: 15px; }
+.project-body .section { scroll-margin-top: 24px; }
+.project-body .reading-width { max-width: 800px !important; }
+.project-body h2 { text-align: center; }
+.project-body h3 { font-weight: 600; }
+.project-body .method-steps { padding-left: 26px; margin: 22px 0; }
+.project-body .method-steps li { padding-left: 6px; margin-bottom: 18px; }
+.project-body .table-scroll { margin: 24px 0; }
+.project-body table { width: 100%; border-collapse: collapse; }
+.project-body caption { text-align: left; color: #626d75; padding: 14px 16px; font-size: 14px; }
+.project-body th, .project-body td { padding: 12px 16px; border-bottom: 1px solid var(--project-line); text-align: right; }
+.project-body th { background: #f4f7f9; }
+.project-body th:first-child, .project-body td:first-child { text-align: left; }
+.spa-project .project-body th, .spa-project .project-body td { text-align: left; }
+.project-body .result-note { font-size: 15px; color: #626d75; }
+.project-body .scope-note { border-left: 3px solid #b8cdd7; padding: 6px 0 6px 22px; margin-top: 28px; }
+.project-body .scope-note p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) {
+  .project-detail .hero-body { padding-top: 36px; }
+  .project-detail .affiliation-list { max-width: 320px; }
+  .project-body th, .project-body td { padding: 10px; font-size: 14px; }
+  .project-sections { gap: 10px 20px; }
+}

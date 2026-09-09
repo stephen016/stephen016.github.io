@@ -1,7 +1,7 @@
 ---
 permalink: /
-title: "Xun Wang - Ph.D. Student at CISPA"
-excerpt: "Ph.D. student at CISPA"
+title: "Xun Wang"
+excerpt: "Third-year Ph.D. student at CISPA, working on trustworthy and efficient machine learning."
 author_profile: true
 redirect_from: 
   - /about/
@@ -12,23 +12,17 @@ redirect_from:
 
 About Me
 ======
-I am currently a second-year Ph.D. student at [CISPA Helmholtz Center for Information Security](https://cispa.de/), where I conduct cutting-edge research at the intersection of machine learning and security. I am supervised by [Prof. Michael Backes](https://michaelbackes.eu/group.html) and daily advised by [Prof. Franziska Boenisch](https://franziska-boenisch.de/) and [Prof. Adam Dziedzic](https://adam-dziedzic.com/) at [SprintML Lab](https://sprintml.com/).
+I am a third-year Ph.D. student at [CISPA Helmholtz Center for Information Security](https://cispa.de/). I am supervised by [Prof. Michael Backes](https://michaelbackes.eu/group.html), with [Prof. Franziska Boenisch](https://franziska-boenisch.de/) as my co-advisor and [Prof. Adam Dziedzic](https://adam-dziedzic.com/) as my mentor. I work with Franziska and Adam daily at [SprintML Lab](https://sprintml.com/).
 
-Prior to my doctoral studies, I obtained my M.S. degree in Computer Science from [Technical University of Munich (TUM)](https://www.tum.de/en/) in 2023, graduating with high distinction. I completed my B.S. degree at [Tongji University](https://en.tongji.edu.cn/) in 2020.
+Prior to my doctoral studies, I obtained my M.S. degree in Computer Science in 2023, graduating with high distinction. I completed my B.S. degree at [Tongji University](https://en.tongji.edu.cn/) in 2020.
 
 Research Interests
 ======
-My research focuses on developing **efficient and privacy-preserving machine learning systems**. I am particularly interested in:
+My research focuses on **trustworthy and efficient machine learning**, with an emphasis on how foundation models are adapted, deployed, and audited. My interests include:
 
-- **Neural Network Pruning & Compression**: Developing structured pruning techniques that maintain model performance while reducing computational overhead
-- **Privacy-Preserving ML**: Creating methods for secure and private transfer learning, particularly in the context of large language models
-- **Efficient Deep Learning**: Designing algorithms that make deep learning more accessible and practical for resource-constrained environments
-- **Machine Learning Security**: Investigating vulnerabilities and defenses in ML systems
-
-Current Research Highlights
-======
-- **Structurally Prune Anything (SPA)**: A versatile framework for structured pruning that works across any architecture, framework, and training stage
-- **Privacy-Preserving Soft Prompt Transfer (POST)**: Efficient methods for transferring knowledge in LLMs while preserving privacy
+- **Model Provenance and Ownership**: Auditing the identity of models served through agentic APIs and developing fingerprints to verify ownership of generative models.
+- **Privacy-Preserving Learning and Auditing**: Designing private adaptations and soft prompt transfer methods for LLMs, and measuring empirical privacy risks through membership inference and data extraction attacks.
+- **Efficient Machine Learning**: Developing architecture-agnostic structured pruning and efficient knowledge transfer methods that reduce the cost of adapting and deploying neural networks.
 
 <!-- Technical Skills
 ======

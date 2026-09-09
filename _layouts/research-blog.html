@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.project }}: {{ page.blog_title | escape }} | Xun Wang</title>
+  <meta name="description" content="{{ page.description | escape }}">
+  <link rel="stylesheet" href="/assets/css/research-blog.css?v=20260909-blogs">
+  <script defer src="/assets/js/research.js"></script>
+</head>
+<body class="research-blog">
+  {% include research-nav.html %}
+  <main id="project-content">
+    <article>
+      <header class="article-header">
+        <p class="article-context"><a href="/publications/">Research explained</a><span>{{ page.project }}</span></p>
+        <h1>{{ page.blog_title }}</h1>
+        <p class="article-deck">{{ page.blog_deck }}</p>
+        <div class="article-byline"><span>By <a href="/">Xun Wang</a></span><span>{{ page.venue }}</span></div>
+        <div class="article-links"><a href="{{ page.paperurl }}">Read the paper</a><a href="#paper">Paper details &amp; citation</a></div>
+      </header>
+      <div class="article-body">{{ content }}</div>
+    </article>
+  </main>
+  <footer class="article-footer">
+    <a href="/publications/">Explore all publications</a>
+    <p><a href="/">Xun Wang</a> — notes on the ideas behind the research.</p>
+  </footer>
+</body>
+</html>

@@ -4,6 +4,9 @@ _site/
 # Ignore the directory for local files during development
 local/
 
+# Local tool-execution history
+logs/
+
 # Ignore the Gemfile that is generated
 Gemfile.lock
 

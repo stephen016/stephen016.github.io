@@ -11,10 +11,10 @@ locale                   : "en-US"
 title                    : "Xun Wang / Personal Page"
 title_separator          : "-"
 name                     : &name "Xun Wang"
-description              : &description "Ph.D Student at CISPA Helmholtz Center for Information Security"
+description              : &description "Third-year Ph.D. student at CISPA, researching trustworthy and efficient machine learning"
 url                      : https://stephen016.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "stephen016.github.io"
+repository               : "stephen016/stephen016.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -24,7 +24,7 @@ author:
   avatar           : "xun.png"
   name             : "Xun Wang"
   pronouns         : # example: "she/her"  
-  bio              : "Ph.D student at CISPA"
+  bio              : "Third-year Ph.D. student at CISPA"
   location         : "Germany"
   #employer         : "Red Brick University"
   uri              : # URL
@@ -171,6 +171,7 @@ exclude:
   - config
   - gulpfile.js
   - log
+  - logs
   - node_modules
   - package.json
   - tmp
