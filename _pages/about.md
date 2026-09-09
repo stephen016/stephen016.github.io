@@ -14,7 +14,7 @@ About Me
 ======
 I am a third-year Ph.D. student at [CISPA Helmholtz Center for Information Security](https://cispa.de/). I am supervised by [Prof. Michael Backes](https://michaelbackes.eu/group.html), with [Prof. Franziska Boenisch](https://franziska-boenisch.de/) as my co-advisor and [Prof. Adam Dziedzic](https://adam-dziedzic.com/) as my mentor. I work with Franziska and Adam daily at [SprintML Lab](https://sprintml.com/).
 
-Prior to my doctoral studies, I obtained my M.S. degree in Computer Science in 2023, graduating with high distinction. I completed my B.S. degree at [Tongji University](https://en.tongji.edu.cn/) in 2020.
+Prior to my doctoral studies, I obtained my M.S. degree in Computer Science from [Technical University of Munich (TUM)](https://www.tum.de/en/) in 2023, graduating with high distinction. I completed my B.S. degree at [Tongji University](https://en.tongji.edu.cn/) in 2020.
 
 Research Interests
 ======
