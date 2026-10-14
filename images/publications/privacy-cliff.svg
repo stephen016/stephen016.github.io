@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="540" viewBox="0 0 720 540" role="img" aria-labelledby="title desc">
+  <title id="title">Auditing TabFM embedding privacy</title>
+  <desc id="desc">A tabular record is processed by a Tabular Foundation Model (TabFM), which produces a shared embedding. Cascade Probing audits this embedding with optional known attributes, recovering age, education, and occupation sequentially. Each prediction informs the next. Simplified overview based on Figures 1 and 2 of the paper.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#65717c"/>
+    </marker>
+  </defs>
+  <rect width="720" height="540" fill="#fff"/>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle" fill="#343b43">
+    <text x="360" y="48" font-size="39" font-weight="700">Auditing TabFM embedding privacy</text>
+    <text x="119" y="118" font-size="32">Tabular record</text>
+    <rect x="35" y="141" width="168" height="81" fill="#f9f1f2" stroke="#b66a78" stroke-width="2"/>
+    <path d="M35 168 H203 M35 195 H203 M91 141 V222 M147 141 V222" stroke="#b66a78" stroke-width="2"/>
+    <rect x="280" y="140" width="160" height="84" rx="6" fill="#edf5f8" stroke="#247b98" stroke-width="3"/>
+    <text x="360" y="195" font-size="44" font-weight="700" fill="#247b98">TabFM</text>
+    <text x="606" y="112" font-size="30">Shared</text>
+    <text x="606" y="147" font-size="30">embedding</text>
+    <g fill="#247b98" stroke="#247b98" stroke-width="2">
+      <rect x="524" y="165" width="24" height="45" fill="#d8eaf2"/>
+      <rect x="557" y="165" width="24" height="45"/>
+      <rect x="590" y="165" width="24" height="45" fill="#a6c9d9"/>
+      <rect x="623" y="165" width="24" height="45" fill="#d8eaf2"/>
+      <rect x="656" y="165" width="24" height="45"/>
+    </g>
+    <g fill="none" stroke="#65717c" stroke-width="3" marker-end="url(#arrow)">
+      <path d="M215 182 H264"/>
+      <path d="M452 182 H509"/>
+      <path d="M606 222 V273"/>
+      <path d="M222 321 H285" stroke-dasharray="7 5"/>
+    </g>
+    <text x="119" y="291" font-size="28">Known</text>
+    <text x="119" y="324" font-size="28">attributes</text>
+    <text x="119" y="357" font-size="25" fill="#65717c">(optional)</text>
+    <rect x="300" y="286" width="396" height="70" rx="6" fill="#edf5f8" stroke="#247b98" stroke-width="2"/>
+    <text x="498" y="332" font-size="37" font-weight="700" fill="#247b98">Cascade Probing</text>
+    <path d="M498 356 V378 H105 V393" fill="none" stroke="#65717c" stroke-width="3" marker-end="url(#arrow)"/>
+    <g fill="#f9f1f2" stroke="#b66a78" stroke-width="2">
+      <rect x="28" y="404" width="156" height="66" rx="4"/>
+      <rect x="239" y="404" width="203" height="66" rx="4"/>
+      <rect x="497" y="404" width="199" height="66" rx="4"/>
+    </g>
+    <g font-size="31" fill="#8b3e51">
+      <text x="106" y="447">Age</text>
+      <text x="340" y="447">Education</text>
+      <text x="596" y="447">Occupation</text>
+    </g>
+    <g fill="none" stroke="#65717c" stroke-width="3" marker-end="url(#arrow)">
+      <path d="M190 437 H225"/>
+      <path d="M448 437 H483"/>
+    </g>
+    <text x="360" y="518" font-size="29" fill="#65717c">Each prediction informs the next</text>
+  </g>
+</svg>

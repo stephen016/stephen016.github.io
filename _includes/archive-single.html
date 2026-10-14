@@ -20,9 +20,14 @@
 <div class="{{ include.type | default: "list" }}__item">
   <article class="archive__item{% if publication_teaser %} publication-with-teaser{% endif %}" itemscope itemtype="http://schema.org/CreativeWork">
     {% if publication_teaser %}
-      <a class="publication-teaser" href="{{ post.pageurl | default: post.paperurl | default: post.url }}" aria-label="View {{ post.title | escape }}">
+      {% assign teaser_url = post.pageurl | default: post.paperurl %}
+      {% if teaser_url %}
+      <a class="publication-teaser" href="{{ teaser_url }}" aria-label="View {{ post.title | escape }}">
+      {% else %}
+      <div class="publication-teaser">
+      {% endif %}
         <img src="{% if teaser contains '://' %}{{ teaser }}{% else %}{{ teaser | prepend: '/images/' | prepend: base_path }}{% endif %}" alt="{{ post.header.teaser_alt | default: post.title | escape }}" loading="lazy" decoding="async" width="{{ post.header.teaser_width }}" height="{{ post.header.teaser_height }}">
-      </a>
+      {% if teaser_url %}</a>{% else %}</div>{% endif %}
       <div class="publication-details">
     {% endif %}
     {% if include.type == "grid" and teaser %}

@@ -1,0 +1,11 @@
+<ul class="news-list" aria-label="Recent news">
+  {% for item in site.data.news %}
+  <li class="news-item">
+    <time class="news-year" datetime="{{ item.year }}">{{ item.year }}</time>
+    <div class="news-body">
+      {{ item.text | markdownify }}
+      {% if item.url %}<a class="news-link" href="{{ item.url }}">{{ item.link_label }}</a>{% endif %}
+    </div>
+  </li>
+  {% endfor %}
+</ul>

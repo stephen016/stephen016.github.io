@@ -97,4 +97,13 @@ body.site-design { padding: 70px 0 0; color: var(--ink); background: white; font
   .site-design .author__name { font-size: 17px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+/* Homepage news uses the existing Academic Pages type and color palette. */
+.home-design .news-list { list-style: none; padding: 0; margin: 0; font-size: 15px; line-height: 1.65; }
+.home-design .news-list .news-item { display: grid; grid-template-columns: 3.5em minmax(0, 1fr); gap: 20px; padding: 16px 0; margin: 0; border-bottom: 1px solid var(--line); }
+.home-design .news-list .news-item:first-child { padding-top: 0; }
+.home-design .news-year { color: var(--muted); font-size: 15px; line-height: 1.8; font-variant-numeric: tabular-nums; }
+.home-design .news-body { min-width: 0; }
+.home-design .news-body p { margin: 0; }
+.home-design .news-link { display: inline-block; margin-top: 5px; font-size: 14px; }
+@media (max-width: 480px) { .home-design .news-list .news-item { grid-template-columns: 3em minmax(0, 1fr); gap: 12px; } }
 @media print { .site-design .masthead, .site-design .page__footer, .skip-link { display: none; } body.site-design { padding: 0; } .site-design #main { padding: 0; } .site-design .sidebar { position: static; } }

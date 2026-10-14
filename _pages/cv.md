@@ -3,7 +3,7 @@ layout: archive
 title: "CV - Xun Wang"
 permalink: /cv/
 author_profile: true
-excerpt: "Curriculum Vitae of Xun Wang, third-year Ph.D. student at CISPA and TUM specializing in trustworthy and efficient machine learning."
+excerpt: "Curriculum Vitae of Xun Wang, third-year Ph.D. student at TUM and CISPA specializing in trustworthy and efficient machine learning."
 redirect_from:
   - /resume
 ---
@@ -12,11 +12,12 @@ redirect_from:
 
 Education
 ======
-* **Ph.D. Student in Computer Science**, CISPA & Technical University of Munich, 2023–present
-  * Advisor: Michael Backes; co-advisor: Franziska Boenisch; mentor: Adam Dziedzic
-* **M.S.**, Technical University of Munich, 2023
+* **Ph.D. Student in Computer Science**, Technical University of Munich & CISPA, 2023–present
+  * Advisor: Michael Backes
+* **M.Sc. in Robotics, Cognition, Intelligence**, Technical University of Munich, 2023
   * Graduated with High Distinction
   * Thesis: Architecture-Agnostic Neural Network Pruning
+* **B.Eng. in Vehicle Engineering**, Tongji University, 2020
 
 
 <!-- Work experience

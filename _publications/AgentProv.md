@@ -8,7 +8,7 @@ excerpt: 'AgentProv audits the identity of agentic LLM APIs through their tool-s
 # Date controls list ordering; the public label uses only the confirmed year.
 date: 2026-08-30
 display_date: '2026'
-venue: 'EMNLP 2026 (Main Conference)'
+venue: 'EMNLP 2026'
 pageurl: '/AgentProv.html'
 paperurl: 'https://arxiv.org/pdf/2609.00052'
 header:
