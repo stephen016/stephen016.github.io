@@ -1,6 +1,8 @@
 # Newest achievements first. Only years are shown: exact acceptance dates are not recorded.
 - year: 2026
   text: 'Our paper "Auditing Privacy Leakage in Tabular Foundation Model Embeddings" was accepted to **NeurIPS 2026**.'
+  url: /PrivacyCliff.html
+  link_label: Project page
 - year: 2026
   text: '**AgentProv**, our work on auditing agentic LLM API providers, was accepted to **EMNLP 2026**.'
   url: /AgentProv.html

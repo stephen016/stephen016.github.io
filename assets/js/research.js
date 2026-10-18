@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   document.querySelectorAll('table').forEach(table => {
+    if (table.parentElement.classList.contains('table-scroll')) return;
     const wrapper = document.createElement('div');
     wrapper.className = 'table-scroll';
     wrapper.tabIndex = 0;

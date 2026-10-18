@@ -1,0 +1,36 @@
+/* Camera-ready figures within the shared POST/Nerfies project template. */
+.privacycliff-project .overview-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; }
+.privacycliff-project .overview-copy h2.title { font-size: 30px; line-height: 1.3; text-wrap: balance; }
+.privacycliff-project .overview-link { color: var(--project-link); font-size: 15px; }
+.privacycliff-project .overview-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.privacycliff-project .setup-figure { max-width: 430px; margin: 0 auto; }
+.privacycliff-project .setup-figure .figure-link { margin: 0; }
+.privacycliff-project .setup-figure img { width: 100%; }
+.privacycliff-project .setup-figure figcaption { font-size: 13px; margin: 12px 0 0; }
+.privacycliff-project table.perf-table { min-width: 720px; }
+.privacycliff-project table.perf-table td, .privacycliff-project table.perf-table th { padding: 12px 10px; }
+.privacycliff-project table.perf-table tbody th { background: transparent; border: 0; font-weight: 500; }
+.privacycliff-project table.perf-table tbody tr:has(strong) { background: transparent; }
+.privacycliff-project table.perf-table tbody tr:nth-child(even) { background: #f8fafb; }
+.privacycliff-project table.perf-table tbody td:last-child { color: #285c74; background: #edf5f8; }
+.privacycliff-project .cliff-figure { margin-top: 32px; }
+.privacycliff-project .cliff-plots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.privacycliff-project .cliff-plots .figure-link { margin: 16px 0 8px; }
+.privacycliff-project .cliff-plots img { width: 100%; }
+.privacycliff-project .plot-label { font-size: 14px; text-align: center; color: #56616b; }
+.privacycliff-project .plot-legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: #56616b; }
+.privacycliff-project .plot-legend span { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.privacycliff-project .legend-line { display: inline-block; width: 20px; border-top: 2px solid #56616b; }
+.privacycliff-project .legend-line.adult { border-color: #d62728; }
+.privacycliff-project .legend-line.german { border-color: #1f77b4; }
+.privacycliff-project .legend-line.heart { border-color: #2ca02c; }
+.privacycliff-project .legend-line.diabetes { border-color: #9467bd; }
+.privacycliff-project .legend-line.joint { border-top-style: dashed; }
+@media (max-width: 768px) {
+  .privacycliff-project .overview-grid { grid-template-columns: 1fr; gap: 28px; }
+  .privacycliff-project .overview-copy { max-width: 540px; margin: auto; }
+  .privacycliff-project .overview-copy h2.title { font-size: 26px; }
+  .privacycliff-project .setup-figure { max-width: 380px; }
+  .privacycliff-project .cliff-plots { grid-template-columns: 1fr; gap: 8px; }
+  .privacycliff-project table.perf-table { min-width: 650px; }
+}

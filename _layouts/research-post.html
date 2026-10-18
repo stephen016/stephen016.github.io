@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="/projects/css/index.css">
   <link rel="stylesheet" href="/assets/css/research.css">
   <link rel="stylesheet" href="/assets/css/research-post.css?v=20260909">
-  <script defer src="/assets/js/research.js"></script>
+  {% if page.project_stylesheet %}<link rel="stylesheet" href="{{ page.project_stylesheet }}">{% endif %}
+  <script defer src="/assets/js/research.js?v=20261018"></script>
 </head>
 <body class="research-design post-style {{ page.project | downcase }}-project">
   {% include research-nav.html %}
@@ -27,7 +28,7 @@
           <div class="is-size-5 publication-authors affiliation-list">{{ page.affiliations_html }}</div>
           <div class="column has-text-centered">
             <div class="publication-links">
-              <span class="link-block"><a class="button is-normal is-rounded is-dark" href="{{ page.paperurl }}">Paper</a></span>
+              {% if page.paperurl %}<span class="link-block"><a class="button is-normal is-rounded is-dark" href="{{ page.paperurl }}">Paper</a></span>{% endif %}
               <span class="link-block"><a class="button is-normal is-rounded is-dark" href="#BibTeX">BibTeX</a></span>
             </div>
           </div>

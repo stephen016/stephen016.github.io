@@ -1,0 +1,116 @@
+---
+layout: research-post
+project: PrivacyCliff
+permalink: /PrivacyCliff.html
+title: "Auditing Privacy Leakage in Tabular Foundation Model Embeddings"
+description: "Cascade Probing audits sensitive-attribute recovery from TabFM embeddings and reveals a Privacy Cliff: one known attribute can expose many others. NeurIPS 2026."
+venue: "NeurIPS 2026"
+authors_html: '<span class="author-block"><a href="/">Xun Wang</a></span><span class="author-block"><a href="https://adam-dziedzic.com/">Adam Dziedzic</a></span><span class="author-block"><a href="https://michaelbackes.eu/">Michael Backes</a></span><span class="author-block"><a href="https://franziska-boenisch.de/">Franziska Boenisch</a></span>'
+affiliations_html: '<span>CISPA Helmholtz Center for Information Security</span>'
+project_stylesheet: /assets/css/privacy-cliff.css
+---
+<section class="section audit-overview" aria-labelledby="overview-title">
+  <div class="container is-max-desktop overview-grid">
+    <div class="overview-copy">
+      <h2 class="title is-3" id="overview-title">How much of a record survives in its embedding?</h2>
+      <p>Replacing a table row with an embedding does not necessarily hide its sensitive attributes. <strong>Cascade Probing</strong> measures what can be recovered, one attribute at a time.</p>
+      <p>Our audit spans <strong>four tabular foundation models and ten datasets</strong>. It reveals a <em>Privacy Cliff</em>: knowing just one attribute can sharply increase the recoverability of the others.</p>
+      <a class="overview-link" href="#method">Explore Cascade Probing <span aria-hidden="true">↓</span></a>
+    </div>
+    <figure class="setup-figure">
+      <a class="figure-link" href="/projects/PrivacyCliff/audit-setup.svg" aria-label="Open the privacy audit setup at full size"><img src="/projects/PrivacyCliff/audit-setup.svg" width="1522" height="1604" alt="A data owner supplies public, sensitive, and irrelevant attributes to a TabFM with a private support set. The auditor receives the embedding, optional public attributes, and query access to the TabFM, then estimates sensitive attributes."></a>
+      <figcaption>The audit setting, from the camera-ready paper. The support data remain private.</figcaption>
+    </figure>
+  </div>
+</section>
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <hr>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>Tabular Foundation Models (TabFMs) produce context-aware embeddings that are increasingly stored, shared, and reused for retrieval, clustering, and cross-institutional data exchange. These embeddings are often treated as privacy-preserving substitutes for raw tabular records, yet their attribute-level information content remains poorly understood. We present a systematic privacy audit of TabFM embeddings: given an embedding and varying amounts of side information, how accurately can sensitive attributes be recovered? We introduce <em>Cascade Probing</em>, a sequential probing method that measures recoverability while accounting for inter-attribute dependencies, significantly outperforming joint probing and optimization-based inversion baselines. Across four TabFMs (TabPFN, TabDPT, Mitra, TabICL) and ten datasets, we find that even without any side information, 65–95% of sensitive attributes can be recovered from embeddings alone. More critically, recoverability exhibits a <em>Privacy Cliff</em>: revealing a single known attribute sharply increases the recoverability of all remaining attributes. This phenomenon generalizes across model architectures and diverse domains, and is not eliminated by standard embedding transformations including noise injection, PCA, and knowledge distillation. These findings suggest that we need more formal privacy techniques for protecting sensitive information inside TabFM embeddings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Cascade Probing</h2>
+    <div class="method-copy content">
+      <p>Tabular attributes are related: recovering one may make another easier to infer. Cascade Probing uses these dependencies instead of predicting every sensitive attribute at once.</p>
+      <p>The auditor receives a released embedding, schema information, and any known attributes of the target record. It can query the <strong>same TabFM endpoint under the same private support context</strong>, without accessing the model weights or support records.</p>
+    </div>
+    <figure>
+      <a class="figure-link" href="/projects/PrivacyCliff/cascade-probing.svg" aria-label="Open the three-stage Cascade Probing pipeline at full size"><img class="centered" src="/projects/PrivacyCliff/cascade-probing.svg" width="3980" height="2333" loading="lazy" alt="Cascade Probing has three stages: compare a released embedding with a masked-query embedding; discover an attribute recovery order using reference data; then sequentially recover attributes, re-querying the TabFM after each prediction."></a>
+      <figcaption>The three stages of Cascade Probing. During inference, each predicted attribute becomes context for the next query. The originally released embedding stays fixed.</figcaption>
+    </figure>
+    <div class="method-copy">
+      <h3 class="title is-4"><span class="circle-num">1</span> Differential query</h3>
+      <p>Keep the known attributes and mask the unknown ones. Querying the TabFM with this partial record produces a baseline embedding. The decoder receives both this baseline and its difference from the released embedding, so it can use the information associated with the missing attributes.</p>
+      <h3 class="title is-4"><span class="circle-num">2</span> Strategy discovery</h3>
+      <p>On reference data, train candidate decoders for the remaining sensitive attributes and select the strongest one on held-out validation data. Add that attribute’s ground-truth value to the reference context, then repeat. This discovers a recovery order and retains a decoder for each step.</p>
+      <h3 class="title is-4"><span class="circle-num">3</span> Cascading inference</h3>
+      <p>For the target record, follow the learned order using <strong>predicted values</strong>, not ground truth. After each prediction, update the partial record and re-query the TabFM. The next decoder uses the new baseline and residual to estimate another attribute.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+    <div class="results-copy content">
+      <p>We evaluate TabPFN, TabDPT, Mitra, and TabICL across ten datasets, from income and credit records to health data and wider tables. The audit considers three reference-data regimes: <strong>Shadow</strong> uses same-distribution records; <strong>Few-Shot</strong> uses 30 real records to seed synthetic-data generation; and <strong>Zero-Shot</strong> generates reference data from schema metadata alone.</p>
+      <h3 class="title is-4">Sensitive attributes are recoverable without known target attributes</h3>
+      <p>On TabPFN v2.5, Cascade Probing reaches <strong>65–90% mean categorical accuracy</strong> in the Shadow setting at <em>K</em> = 0, where no attributes of the target record are known. It outperforms all five comparison methods in this experiment.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Categorical recovery results; scroll horizontally on small screens">
+        <table class="perf-table">
+          <caption>Table 1. Mean categorical recovery accuracy (%), averaged over sensitive-attribute counts. TabPFN v2.5, Shadow, <em>K</em> = 0. Higher means more leakage is recovered; the best result in each row is bold.</caption>
+          <thead><tr><th scope="col">Dataset</th><th scope="col">Joint</th><th scope="col">DirectOpt</th><th scope="col">WGAN</th><th scope="col">TabSyn</th><th scope="col">UIFV</th><th scope="col">Cascade</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Adult</th><td>22.0</td><td>46.0</td><td>59.0</td><td>55.0</td><td>62.9</td><td><strong>65.0</strong></td></tr>
+            <tr><th scope="row">German Credit</th><td>44.0</td><td>54.0</td><td>62.0</td><td>61.0</td><td>49.9</td><td><strong>74.0</strong></td></tr>
+            <tr><th scope="row">Heart Disease</th><td>55.0</td><td>69.0</td><td>75.0</td><td>75.0</td><td>67.1</td><td><strong>79.0</strong></td></tr>
+            <tr><th scope="row">ACS Employment</th><td>51.7</td><td>62.0</td><td>62.0</td><td>68.0</td><td>88.2</td><td><strong>90.0</strong></td></tr>
+            <tr><th scope="row">ACS Public Coverage</th><td>46.0</td><td>45.0</td><td>44.0</td><td>42.0</td><td>67.3</td><td><strong>75.0</strong></td></tr>
+            <tr><th scope="row">ACS Income-to-Poverty</th><td>33.2</td><td>53.0</td><td>53.0</td><td>51.0</td><td>83.9</td><td><strong>84.5</strong></td></tr>
+            <tr><th scope="row">ACS Health Insurance</th><td>41.9</td><td>45.0</td><td>43.0</td><td>43.0</td><td>62.1</td><td><strong>68.6</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="title is-4">One known attribute can trigger a Privacy Cliff</h3>
+      <p>In the Few-Shot setting, revealing one attribute raises Cascade Probing’s categorical accuracy from <strong>55% to 90% on Adult</strong> and from <strong>59% to 87% on German Credit</strong>. Joint Probing also shows this jump, indicating that the effect is not specific to the cascade.</p>
+    </div>
+    <figure class="cliff-figure">
+      <div class="plot-legend" aria-label="Plot legend">
+        <span><i class="legend-line adult" aria-hidden="true"></i>Adult</span><span><i class="legend-line german" aria-hidden="true"></i>German Credit</span><span><i class="legend-line heart" aria-hidden="true"></i>Heart Disease</span><span><i class="legend-line diabetes" aria-hidden="true"></i>Diabetes</span>
+        <span><i class="legend-line" aria-hidden="true"></i>Cascade</span><span><i class="legend-line joint" aria-hidden="true"></i>Joint</span>
+      </div>
+      <div class="cliff-plots">
+        <div><a class="figure-link" href="/projects/PrivacyCliff/privacy-cliff-categorical.svg" aria-label="Open the categorical Privacy Cliff plot at full size"><img src="/projects/PrivacyCliff/privacy-cliff-categorical.svg" width="720" height="360" loading="lazy" alt="Categorical recovery accuracy versus number of known attributes. Adult and German Credit show a sharp increase when one attribute becomes known; Heart Disease starts with high Cascade recovery accuracy."></a><p class="plot-label">Categorical attributes · accuracy ↑</p></div>
+        <div><a class="figure-link" href="/projects/PrivacyCliff/privacy-cliff-continuous.svg" aria-label="Open the continuous Privacy Cliff plot at full size"><img src="/projects/PrivacyCliff/privacy-cliff-continuous.svg" width="720" height="360" loading="lazy" alt="Continuous attribute recovery error versus number of known attributes. Errors generally decrease with side information; the dashed Joint Probing curves drop steeply after the first known attribute."></a><p class="plot-label">Continuous attributes · error (NMAE) ↓</p></div>
+      </div>
+      <figcaption>Figure 3 from the camera-ready paper, in the Few-Shot setting. The shaded region marks <em>K</em> = 0: no known target attributes. Higher categorical accuracy and lower normalized mean absolute error (NMAE) both mean more accurate recovery. Click either plot to enlarge it.</figcaption>
+    </figure>
+    <div class="results-copy content">
+      <h3 class="title is-4">The risk extends across model families</h3>
+      <p>Substantial leakage also appears in TabDPT, Mitra, and TabICL. On Adult in the Few-Shot setting, categorical recovery with no known target attributes reaches <strong>93% for TabDPT, 86% for Mitra, and 95% for TabICL</strong>. These models therefore expose considerable information even before extra attributes are revealed.</p>
+      <h3 class="title is-4">Common embedding transformations do not eliminate leakage</h3>
+      <p>Noise injection and principal component analysis can reduce recovery, but sensitive information remains. Knowledge distillation can even increase recoverability in the tested settings. The findings motivate privacy mechanisms with formal guarantees, rather than treating an embedding transformation itself as privacy protection.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@inproceedings{wang2026auditing,
+  title = {Auditing Privacy Leakage in Tabular Foundation Model Embeddings},
+  author = {Xun Wang and Adam Dziedzic and Michael Backes and Franziska Boenisch},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year = {2026}
+}</code></pre>
+  </div>
+</section>

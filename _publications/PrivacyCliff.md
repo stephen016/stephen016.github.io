@@ -3,11 +3,12 @@ title: "Auditing Privacy Leakage in Tabular Foundation Model Embeddings"
 collection: publications
 display_order: 0
 header:
-  teaser: publications/privacy-cliff.svg
-  teaser_alt: 'A tabular record passes through a Tabular Foundation Model (TabFM) to produce a shared embedding. Cascade Probing uses this embedding and optional known attributes to recover age, education, and occupation sequentially.'
-  teaser_width: 720
-  teaser_height: 540
+  teaser: publications/privacy-cliff-camera-ready.svg
+  teaser_alt: 'Camera-ready audit setup: a TabFM conditioned on a private support set releases an embedding. The privacy auditor uses the embedding, optional public attributes, and query access to estimate sensitive attributes.'
+  teaser_width: 1522
+  teaser_height: 1604
 permalink: /publication/PrivacyCliff/
+pageurl: /PrivacyCliff.html
 authors: '<b>Xun Wang</b>, Adam Dziedzic, Michael Backes, Franziska Boenisch'
 excerpt: 'Cascade Probing audits sensitive-attribute leakage from tabular foundation-model embeddings and reveals a privacy cliff when additional attributes are known.'
 # Record-added date; the public display uses only the confirmed conference year.
