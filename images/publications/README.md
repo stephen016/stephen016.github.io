@@ -7,7 +7,8 @@ The WebP images are resized copies of the original research figures for the publ
 - `post.webp`: `projects/POST/POST_v2.png` in this repository.
 - `spa.webp`: `projects/SPA/System_overview.png` in this repository.
 - `agentprov.webp`: Rendered from `ARR_26may/arxiv_paper/figs/teaser.pdf`. The website export excludes the draft color palette below the illustration; the research illustration itself is unchanged. Paper: https://arxiv.org/abs/2609.00052.
-- `privacy-cliff-camera-ready.svg`: Current teaser, exported directly from `figures/setup_camera_ready.pdf` (Figure 1) of *Auditing Privacy Leakage in Tabular Foundation Model Embeddings* on 2026-10-18. It includes the TabFM, private support context, and auditor query access. See `projects/PrivacyCliff/README.md` for provenance. The teaser links to the local project page; no manuscript link is exposed.
+- `privacy-cliff-cascade.svg`: Current teaser, copied from `projects/PrivacyCliff/cascade-probing.svg`, the camera-ready Figure 2 exported on 2026-10-18. It shows differential queries, strategy discovery, and cascading inference. The teaser links to the project page; no manuscript link is exposed.
+- `privacy-cliff-camera-ready.svg`: Retained setup figure, exported from `figures/setup_camera_ready.pdf` (Figure 1) on 2026-10-18. Superseded as the publication teaser by the Cascade Probing figure above.
 - `privacy-cliff.svg`: Retained earlier schematic, based on Figures 1–2 of the 2026-10-13 manuscript. Superseded by the camera-ready figure above.
 
 To add a teaser to another publication, set `header.teaser` (relative to `images/`), `header.teaser_alt`, `header.teaser_width`, and `header.teaser_height` in its front matter. The figure links to the project page, or to the paper if no project page is set. When neither is available, the teaser is displayed without a link.

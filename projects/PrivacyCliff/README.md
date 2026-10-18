@@ -7,6 +7,6 @@ Figures exported without changing the scientific content from the author-provide
 - `privacy-cliff-categorical.svg`: `figures/privacy_cliff_categorical.pdf`, Figure 3(a).
 - `privacy-cliff-continuous.svg`: `figures/privacy_cliff_continuous.pdf`, Figure 3(b).
 
-Figure 3's shared legend is represented as responsive HTML on the page; the plotted curves, axes, labels, and shaded regions are unchanged. The setup figure is also copied to `images/publications/privacy-cliff-camera-ready.svg` for the publication list. Table 1 is transcribed as accessible HTML, with proportions expressed as percentages. All values and the single-paragraph abstract come from the camera-ready version.
+Figure 3's shared legend is represented as responsive HTML on the page; the plotted curves, axes, labels, and shaded regions are unchanged. Figure 2 is also copied to `images/publications/privacy-cliff-cascade.svg` for the publication list. The earlier setup teaser is retained as `images/publications/privacy-cliff-camera-ready.svg` but is no longer selected. Table 1 is transcribed as accessible HTML, with proportions expressed as percentages. All values and the single-paragraph abstract come from the camera-ready version.
 
 The complete manuscript, source archive, and private Overleaf project URL are intentionally not published here. No public paper or code URL was supplied for this page.

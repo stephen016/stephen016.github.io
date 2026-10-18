@@ -3,10 +3,10 @@ title: "Auditing Privacy Leakage in Tabular Foundation Model Embeddings"
 collection: publications
 display_order: 0
 header:
-  teaser: publications/privacy-cliff-camera-ready.svg
-  teaser_alt: 'Camera-ready audit setup: a TabFM conditioned on a private support set releases an embedding. The privacy auditor uses the embedding, optional public attributes, and query access to estimate sensitive attributes.'
-  teaser_width: 1522
-  teaser_height: 1604
+  teaser: publications/privacy-cliff-cascade.svg
+  teaser_alt: 'Cascade Probing: differential queries and strategy discovery lead to cascading inference, sequentially recovering age, education, and occupation by re-querying the TabFM after each prediction.'
+  teaser_width: 3980
+  teaser_height: 2333
 permalink: /publication/PrivacyCliff/
 pageurl: /PrivacyCliff.html
 authors: '<b>Xun Wang</b>, Adam Dziedzic, Michael Backes, Franziska Boenisch'
