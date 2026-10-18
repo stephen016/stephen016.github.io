@@ -103,6 +103,19 @@ project_stylesheet: /assets/css/privacy-cliff.css
     </div>
   </div>
 </section>
+<section class="section" id="takeaways" aria-labelledby="takeaways-title">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered" id="takeaways-title">Takeaways</h2>
+    <div class="results-copy content">
+      <ul>
+        <li><strong>Embeddings are not automatically private.</strong> In our query-access audit, Cascade Probing recovers sensitive attributes even when no attributes of the target record are known.</li>
+        <li><strong>A little side information can expose much more.</strong> Knowing just one attribute can trigger a Privacy Cliff, sharply improving recovery of the remaining attributes. Privacy audits should account for what an embedding recipient may already know.</li>
+        <li><strong>Transforming an embedding is not a privacy guarantee.</strong> Noise, dimensionality reduction, and distillation do not eliminate leakage in our experiments. Sharing TabFM embeddings calls for explicit privacy evaluation and protection mechanisms with formal guarantees.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title is-3">BibTeX</h2>
