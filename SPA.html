@@ -1,8 +1,6 @@
 ---
-layout: research-blog
+layout: research-post
 project: SPA
-blog_title: "Making a neural network smaller without breaking it"
-blog_deck: "SPA follows the connections inside a model to discover which parts can be removed together."
 permalink: /SPA.html
 title: "Structurally Prune Anything: Any Architecture, Any Framework, Any Time"
 description: "SPA is an architecture- and framework-agnostic approach to structured neural network pruning."
@@ -16,13 +14,13 @@ teaser_width: 6054
 teaser_height: 2566
 teaser_alt: 'SPA converts a source model into a computational graph, couples and groups dependent channels, estimates importance, and exports a pruned model.'
 teaser_caption: 'A shared computational graph connects source models, channel dependencies, and structured pruning. After pruning, the resulting model can be converted to a target framework.'
-results_label: 'Capabilities'
 ---
-{% include project-articles/SPA.html %}
-{% include project-paper-details.html %}
 <section class="section" id="abstract">
-  <div class="container reading-width content">
-    <h2 class="title is-3">Abstract</h2>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
     <p>Neural network pruning serves as a critical technique for enhancing the efficiency of deep learning models.
             Unlike unstructured pruning, which only sets specific parameters to zero, structured pruning eliminates entire channels,
             thus yielding direct computational and storage benefits. However, the diverse patterns for coupling parameters,
@@ -41,10 +39,86 @@ results_label: 'Capabilities'
             data. In extensive experiments, SPA shows competitive to state-of-the-art pruning
             performance across various architectures, from popular frameworks, at different
             pruning times.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Method</h2>
+    <div class="method-copy content">
+      <p id="problem">Structured pruning removes entire channels rather than setting individual weights to zero. This makes the parameter arrays smaller and reduces arithmetic and storage requirements. Because channels are connected across layers, their removal must be coordinated to preserve the network’s structure.</p>
+    </div>
+    <figure>
+      <a class="figure-link" href="/projects/SPA/System_overview.png" aria-label="Open the SPA system overview at full size"><img class="centered" src="/projects/SPA/System_overview.png" alt="SPA converts models from source frameworks to a shared graph, propagates channel dependencies, groups and scores them, prunes them, and exports the smaller model." width="6054" height="2566" loading="lazy"></a>
+      <figcaption>SPA separates the source framework from the pruning logic through a shared computational graph. Dependency analysis determines which channels must be removed together; group-level importance estimation determines which candidates to remove.</figcaption>
+    </figure>
+    <div class="method-copy">
+      <h3 class="title is-4"><span class="circle-num">1</span> Standardized computational graph</h3>
+      <p>SPA converts the source model into ONNX, a common representation of machine-learning models. Standardized operators describe the model’s computation, shapes, and parameters, allowing the pruning logic to operate independently of the original framework’s layer implementations.</p>
+      <h3 class="title is-4" id="dependencies"><span class="circle-num">2</span> Channel dependency analysis</h3>
+      <p>Mask propagation follows candidate channel removals through the graph using operator-specific rules. It identifies channels that must change together across additions, concatenations, grouped convolutions, and other operations. For example, channels on two branches joined by an addition must remain aligned.</p>
+      <h3 class="title is-4"><span class="circle-num">3</span> Group-level importance estimation</h3>
+      <p>Coupled channels are organized into groups and scored using information across their linked parameters. This separates the structural question of what must be removed together from the choice of importance criterion, allowing existing pruning criteria to be used in a structured group setting.</p>
+      <h3 class="title is-4"><span class="circle-num">4</span> Coordinated pruning and export</h3>
+      <p>SPA removes lower-scoring candidates together and updates the parameter arrays and shapes in the ONNX model. The smaller model can then be converted to a suitable framework for further training or deployment. Compatibility depends on model conversion and support for the operators involved.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="timing">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Pruning Settings</h2>
+    <div class="results-copy content">
+      <p>By separating dependency analysis from importance estimation, SPA supports pruning at three stages:</p>
+      <ul>
+        <li><strong>Before training:</strong> prune the structure, then train the smaller network.</li>
+        <li><strong>After training, with fine-tuning:</strong> prune a trained model, then use additional training to recover accuracy.</li>
+        <li><strong>After training, without fine-tuning:</strong> produce a smaller model without a subsequent training stage.</li>
+      </ul>
+      <h3 class="title is-4">Optimal Brain SPA (OBSPA)</h3>
+      <p>For pruning without fine-tuning, OBSPA selects whole coupled channels for removal and adjusts the remaining weights to help preserve each layer’s outputs. It can operate without the original training data: the strict data-free setting uses synthetic inputs sampled from a uniform distribution for calibration.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+    <div class="results-copy content">
+      <p>The paper evaluates <strong>11 architectures</strong> and demonstrates pruning models originating in <strong>PyTorch, TensorFlow, MXNet, and JAX</strong>. The experiments include convolutional networks, a vision transformer, and DistilBERT for sentiment classification.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="SPA accuracy and FLOPs results; scroll horizontally on small screens">
+        <table class="perf-table">
+          <caption>Selected architecture results with pruning followed by fine-tuning. Image classification uses CIFAR-10; sentiment classification uses SST-2.</caption>
+          <thead><tr><th scope="col">Model</th><th scope="col">Original accuracy</th><th scope="col">Pruned accuracy</th><th scope="col">FLOPs reduction factor</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">ResNet-50</th><td>93.26%</td><td>93.42%</td><td>2.13×</td></tr>
+            <tr><th scope="row">ViT-base</th><td>95.35%</td><td>96.10%</td><td>2.05×</td></tr>
+            <tr><th scope="row">DistilBERT</th><td>91.06%</td><td>88.88%</td><td>2.04×</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A 2× FLOPs reduction factor means roughly half as many arithmetic operations, not necessarily half the latency on a particular device. The results illustrate the accuracy–computation trade-off across different models and tasks.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="takeaways" aria-labelledby="takeaways-title">
+  <div class="container is-max-desktop">
+    <hr>
+    <h2 class="title is-3 has-text-centered" id="takeaways-title">Takeaways</h2>
+    <div class="results-copy content">
+      <ul>
+        <li><strong>Prune connected structures, not isolated channels.</strong> Explicit dependency analysis keeps coupled parts of the network consistent when channels are removed.</li>
+        <li><strong>Separate structure from scoring.</strong> A shared graph representation lets different importance criteria work across architectures, source frameworks, and pruning stages.</li>
+        <li><strong>Match pruning to the available resources.</strong> SPA supports workflows with or without further training; OBSPA addresses the setting without fine-tuning or original training data.</li>
+      </ul>
+    </div>
   </div>
 </section>
 <section class="section" id="BibTeX">
-  <div class="container reading-width content">
+  <div class="container is-max-desktop content">
     <h2 class="title is-3">BibTeX</h2>
     <pre><code>@misc{wang2024structurallypruneanythingarchitecture,
         title={Structurally Prune Anything: Any Architecture, Any Framework, Any Time},
