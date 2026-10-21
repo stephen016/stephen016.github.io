@@ -1,13 +1,7 @@
-# Newest achievements first. Only years are shown: exact acceptance dates are not recorded.
+# Latest updates first. Only years are shown: exact announcement dates are not recorded.
 - year: 2026
   text: 'Our paper "Auditing Privacy Leakage in Tabular Foundation Model Embeddings" was accepted to **NeurIPS 2026**.'
-  url: /PrivacyCliff.html
-  link_label: Project page
 - year: 2026
   text: '**AgentProv**, our work on auditing agentic LLM API providers, was accepted to **EMNLP 2026**.'
-  url: /AgentProv.html
-  link_label: Project page
 - year: 2026
   text: '"Benchmarking Empirical Privacy Protection for Adaptations of Large Language Models" was accepted to **ICLR 2026** as an **oral presentation**.'
-  url: https://sprintml.com/Benchmarking_Empirical_Privacy_Protection_for_Adaptations_of_LLMs/
-  link_label: Project page
