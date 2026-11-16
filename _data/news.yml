@@ -2,6 +2,6 @@
 - year: 2026
   text: 'Our paper "Auditing Privacy Leakage in Tabular Foundation Model Embeddings" was accepted to **NeurIPS 2026**.'
 - year: 2026
-  text: '**AgentProv**, our work on auditing agentic LLM API providers, was accepted to **EMNLP 2026**.'
+  text: 'Our paper "AgentProv: Auditing Agentic LLM API Providers via Tool-use Policy Probes" was accepted to **EMNLP 2026**.'
 - year: 2026
   text: '"Benchmarking Empirical Privacy Protection for Adaptations of Large Language Models" was accepted to **ICLR 2026** as an **oral presentation**.'
